@@ -4,20 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TilauksetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Tilaukset.dbo.Asetukset' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Asetukset">
-          <Property Name="Yrityksen_nimi" Type="nvarchar" MaxLength="50" />
-          <Property Name="Osoite" Type="nvarchar" MaxLength="50" />
-          <Property Name="Postinumero" Type="numeric" Precision="30" Scale="0" />
-          <Property Name="Puhelin" Type="varchar" MaxLength="50" />
-          <Property Name="sähköposti" Type="nvarchar" MaxLength="50" />
-          <Property Name="asetus_1" Type="varchar" MaxLength="50" />
-          <Property Name="asetus_2" Type="varchar" MaxLength="50" />
-          <Property Name="infoc_1" Type="nvarchar" MaxLength="50" />
-          <Property Name="infoc_2" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
+    <Schema Namespace="TilauksetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asiakkaat">
           <Key>
             <PropertyRef Name="AsiakasID" />
@@ -84,7 +71,7 @@ warning 6013: The table/view 'Tilaukset.dbo.Asetukset' does not have a primary k
           </Key>
           <Property Name="TuoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nimi" Type="nvarchar" MaxLength="50" />
-          <Property Name="Ahinta" Type="numeric" Precision="7" Scale="2" />
+          <Property Name="Ahinta" Type="numeric" Precision="10" Scale="2" />
           <Property Name="Kuva" Type="nvarchar" MaxLength="200" />
           <Property Name="Lisätieto_1" Type="nvarchar" MaxLength="100" />
           <Property Name="Lisätieto_2" Type="nvarchar" MaxLength="100" />
@@ -178,8 +165,7 @@ warning 6013: The table/view 'Tilaukset.dbo.Asetukset' does not have a primary k
             <End Role="Tilausrivit" EntitySet="Tilausrivit" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TilauksetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -258,7 +244,7 @@ warning 6013: The table/view 'Tilaukset.dbo.Asetukset' does not have a primary k
           </Key>
           <Property Name="TuoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Ahinta" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="Ahinta" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="Kuva" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Lisätieto_1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Lisätieto_2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />

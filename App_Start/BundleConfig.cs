@@ -24,10 +24,10 @@ namespace TilausDB2
                       "~/Scripts/gijgo/combined.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstraplum.css",
+                      "~/Content/omat.css",
                       "~/Content/Site.css",
-                      "~/Content/gijgo/combined/gijgo.css"
-            ));
+                      "~/Content/bootstraplum.css",
+                      "~/Content/gijgo/combined/gijgo.css"));
         }
     }
 }
