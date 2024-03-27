@@ -1,6 +1,9 @@
-﻿.div {
-    color:red;
-    text-shadow:1px 1px violet;
+﻿
+
+
+div {
+    color: red;
+    text-shadow: 1px 1px blue;
     font-family: 'MS UI Gothic';
-    font-size: 20px;
+    font-size: 35px;
 }

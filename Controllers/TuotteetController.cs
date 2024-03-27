@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TilausDB2.Models;
+using PagedList;
 
 namespace TilausDB2.Controllers
 {
@@ -15,9 +16,88 @@ namespace TilausDB2.Controllers
         private TilauksetEntity db = new TilauksetEntity();
 
         // GET: Tuotteet
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(db.Tuotteet.ToList());
+        //}
+
+        // GET: Products
+        public ActionResult Index(string sortOrder, string currentFilter1, string searchString1, int? page, int? pagesize)
         {
-            return View(db.Tuotteet.ToList());
+            #region Viewbaglauseet
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.ProductNameSortParm = String.IsNullOrEmpty(sortOrder) ? "productname_desc" : "";
+            ViewBag.UnitPriceSortParm = sortOrder == "UnitPrice" ? "unitprice_desc" : "UnitPrice";
+
+            #endregion
+
+            #region if Sivutushaku
+            if (searchString1 != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString1 = currentFilter1;
+            }
+
+            ViewBag.currentFilter1 = searchString1;
+            #endregion
+
+            #region LINQ haku kannasta
+            var tuotteet = from p in db.Tuotteet
+                           select p;
+            #endregion
+
+            #region ehtolauseet,lajittelu ja switch
+
+            if (!String.IsNullOrEmpty(searchString1))
+            {
+
+                switch (sortOrder)
+                {
+                    case "productname_desc":
+                        tuotteet = tuotteet.Where(p => p.Nimi.Contains(searchString1)).OrderByDescending(p => p.Nimi);
+                        break;
+                    case "UnitPrice":
+                        tuotteet = tuotteet.Where(p => p.Nimi.Contains(searchString1)).OrderBy(p => p.Ahinta);
+                        break;
+                    case "unitprice_desc":
+                        tuotteet = tuotteet.Where(p => p.Nimi.Contains(searchString1)).OrderByDescending(p => p.Ahinta);
+                        break;
+                    default:
+                        tuotteet = tuotteet.Where(p => p.Nimi.Contains(searchString1)).OrderBy(p => p.Ahinta);
+                        break;
+                }
+            }
+            else
+            {
+                switch (sortOrder)
+                {
+
+                    case "productname_desc":
+                        tuotteet = tuotteet.OrderByDescending(p => p.Nimi);
+                        break;
+                    case "UnitPrice":
+                        tuotteet = tuotteet.OrderBy(p => p.Ahinta);
+                        break;
+                    case "unitprice_desc":
+                        tuotteet = tuotteet.OrderByDescending(p => p.Ahinta);
+                        break;
+                    default:
+                        tuotteet = tuotteet.OrderBy(p => p.Ahinta);
+                        break;
+
+                }
+            }
+            #endregion
+
+            #region muuttujia
+            int pageSize = (pagesize ?? 8);
+            int pageNumber = (page ?? 1);
+            #endregion
+
+            return View(tuotteet.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Tuotteet/Details/5

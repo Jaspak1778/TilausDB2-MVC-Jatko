@@ -1,41 +1,82 @@
-﻿@model IEnumerable<TilausDB2.Models.Tuotteet>
+﻿@model PagedList.IPagedList<TilausDB2.Models.Tuotteet>
+@using PagedList.Mvc;
+
+@*@model IEnumerable<TilausDB2.Models.Tuotteet>*@
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tuotteet";
 }
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
 <h2>Tuotteet</h2>
+
+@*Taulun headeri*@
+
 <table class="table table-sm">
     <thead>
+        @using (Html.BeginForm("Index", "Tuotteet", FormMethod.Get))
+        {
         <tr class="table-light">
-            <th scope="col">Artikkeli</th>
-            <th><a class="btn btn-outline-info" href="/Tuotteet/Create"><img src="~/Icons/plus.svg" width="24" height="24" />    Tuote</a></th>
+            <th class="container">
+                <div class="row">
+                    <div class="col-5">
+                        
+                        <a class="badge bg-success" href="@Url.Action("Index", new { sortOrder = ViewBag.ProductNameSortParm, currentFilter1 = ViewBag.currentFilter1 })" aria-label="SortOrder">Järjestä tuotteen nimellä</a>
+                        <a class="badge bg-success" href="@Url.Action("Index", new { sortOrder = ViewBag.UnitPriceSortParm, currentFilter1 = ViewBag.currentFilter1 })" aria-label="SortOrder">Järjestä hinnan mukaan</a>
+                    </div>
+                    <div class="col-6 style=" display:inline"">
+                        @Html.TextBox("searchString1", ViewBag.currentFilter1 as string, new { @class = "form-control", style = "width:200px; display:inline" })
+                        <input style="height:37px; width:112px" class="btn btn-success btm-sm form-control" type="submit" value="Etsi" />
+                    </div>
+                    <div class="col">
+                        <a class="badge bg-success" data-toggle="tooltip" data-placement="bottom" title="Lisää tuote" href="/Tuotteet/Create"><img src="~/Icons/plus.svg" width="24" height="24" aria-label="Luo" />    Tuote</a>
+                    </div>
+                </div>
+            </th>
             <th></th>
         </tr>
+        }
     </thead>
     <tbody>
+            
         @foreach (var item in Model)
         {
-            decimal? hinta = item.Ahinta;
-            <tr>
-                <td>
-                    <div class="container">
-                        <div class="col">Tuotenro @item.TuoteID</div>
-                        <div class="row row-cols-5">
-                            <div class="col"><a href="@item.Kuva" ; target="_blank"><img style="height: 100px; width: 100px; display: block;" src="@item.Kuva" /><img /></a></div>
-                            <div class="col">@item.Nimi</div>
-                            <div class="col">@item.Lisätieto_1</div>
-                            <div class="col-4">@item.Lisätieto_2</div>
-                            <div class="col div">@hinta €</div>
-                        </div>
+           
+        <tr>
+            <td>
+                <div class="container">
+                    <div class="row">
+                    <div class="col">Tuotenro @item.TuoteID</div>
+                    <div class="row row-cols-4">
+                        <div class="col"><a href="@item.Kuva" ; target="_blank"><img style="height: 130px; width: 130px; display: block;" src="@item.Kuva" /><img /></a></div>
+                        <div class="col">@item.Nimi. @item.Lisätieto_1</div>
+                        <div class="col-4">@item.Lisätieto_2</div>
+                        <div class="col text-danger" style="font-size:20px">@item.Ahinta €</div>
                     </div>
-                </td>
-                <td>
-                    <a class="btn btn-info" href="/Tuotteet/Edit?id=@item.TuoteID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
-                    <a class="btn btn-outline-dark" href="/Tuotteet/Details?id=@item.TuoteID"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
-                    <a class="btn btn-outline-dark" href="/Tuotteet/Delete?id=@item.TuoteID"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
-                </td>
-            </tr>
+                </div>
+                </div>
+            </td>
+            <td>
+                <div class="tooltip-inner">
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Tuotteet/Edit?id=@item.TuoteID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Lisätiedot" href="/Tuotteet/Details?id=@item.TuoteID"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Tuotteet/Delete?id=@item.TuoteID"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
+                </div>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
 
+@*sivutus*@
 
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter1 = ViewBag.currentFilter1 }))
+
+
+@*alkuperäiset linkit
+@*Html.ActionLink("Järjestä tuotteen nimellä", "Index", new { sortOrder = ViewBag.ProductNameSortParm, currentFilter1 = ViewBag.currentFilter1 })
+    @Html.ActionLink("Järjestä hinnan mukaan", "Index", new { sortOrder = ViewBag.UnitPriceSortParm, currentFilter1 = ViewBag.currentFilter1 })*@
