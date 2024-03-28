@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TilausDB2.Models;
+using TilausDB2.ViewModels;
 
 namespace TilausDB2.Controllers
 {
@@ -20,6 +21,15 @@ namespace TilausDB2.Controllers
             var tilaukset = db.Tilaukset.Include(t => t.Asiakkaat).Include(t => t.Postitoimipaikat);
             return View(tilaukset.ToList());
         }
+
+        #region TilausOtsikot
+        public ActionResult TilausOtsikot()
+        {
+            var orders = db.Tilaukset.Include(o => o.Asiakkaat);
+            return View(orders.ToList());
+        }
+        #endregion
+
 
         // GET: Tilaukset/Details/5
         public ActionResult Details(int? id)
@@ -132,5 +142,38 @@ namespace TilausDB2.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #region Tilausrivit
+
+        public ActionResult _TilausRivit(int? orderid)
+        {
+            if ((orderid == null) || (orderid == 0))
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                var orderRowsList = from od in db.Tilausrivit
+                                    join p in db.Tuotteet on od.TuoteID equals p.TuoteID
+
+                                    where od.TilausID == orderid
+                                    //orderby-lause
+                                    select new OrderRows
+                                    {
+                                        TilausID = (int)od.TilausID,
+                                        TuoteID = p.TuoteID,
+                                        Ahinta = (float)p.Ahinta,
+                                        Maara = (int)od.Maara,
+                                        Nimi = p.Nimi,
+                                        
+
+                                    };
+                return PartialView(orderRowsList);
+            }
+
+        }
+        #endregion
+
+        
     }
 }
