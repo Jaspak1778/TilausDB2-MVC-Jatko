@@ -1,16 +1,30 @@
 ﻿@model TilausDB2.Models.Tilausrivit
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Muokkaa";
 }
 
-<h2>Edit</h2>
-
+<h2> Muokkaa tilausta</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+    <section>
+        <table class="table">
+            <tr>
+                <th>Tilaus nro</th>
+                <th>Tuotenimike</th>
+                <th>Asiakas</th>
+            </tr>
+            <tr>
+                <th>@Model.TilausID</th>
+                <th>@Model.Tuotteet.Nimi</th>
+                <th>@Model.Tilaukset.Asiakkaat.Nimi</th>
+            </tr>
+        </table>
+    </section>
+
+
     <div class="form-horizontal">
         <h4>Tilausrivit</h4>
         <hr />

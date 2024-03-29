@@ -23,9 +23,28 @@ namespace TilausDB2.Controllers
         }
 
         #region TilausOtsikot
-        public ActionResult TilausOtsikot()
+        public ActionResult TilausOtsikot(string sortOrder)
         {
+            #region Viewbaglauseet
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.Päiväys = String.IsNullOrEmpty(sortOrder) ? "sortByDate" : "";
+            
+
+            #endregion
+
             var orders = db.Tilaukset.Include(o => o.Asiakkaat);
+
+            switch (sortOrder) 
+            {
+                case "sortByDate":
+                    orders = orders.OrderByDescending(p => p.Tilauspvm);
+                    ViewBag.Text = "ByDate";
+                    break;
+                default:
+                    orders = orders.OrderBy(p => p.Tilauspvm);
+                    ViewBag.Text = "Default";
+                    break;
+            }
             return View(orders.ToList());
         }
         #endregion

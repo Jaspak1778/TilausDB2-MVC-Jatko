@@ -7,3 +7,15 @@
     font-family: 'MS UI Gothic';
     font-size: 24px;
 }
+
+.omahead {
+    font-size: 24px;
+    border-radius: 10px;
+    background-color: rgba(35, 157, 201, 0.79);
+    padding: 20px;
+    width: auto;
+    height: 78px;
+    border-color: black;
+    white-space: nowrap;
+}
+

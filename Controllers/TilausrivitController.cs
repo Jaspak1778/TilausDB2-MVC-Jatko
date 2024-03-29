@@ -64,13 +64,14 @@ namespace TilausDB2.Controllers
         }
 
         // GET: Tilausrivit/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? TilausID, int? TuoteID)
         {
-            if (id == null)
+            if (TilausID == null || TuoteID == null )
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tilausrivit tilausrivit = db.Tilausrivit.Find(id);
+            /*Tilausrivit tilausrivit = db.Tilausrivit.Find(TilausID, TuoteID);*/
+            Tilausrivit tilausrivit = db.Tilausrivit.SingleOrDefault(tr => tr.TilausID == TilausID && tr.TuoteID == TuoteID); // ei ole PK niin..
             if (tilausrivit == null)
             {
                 return HttpNotFound();

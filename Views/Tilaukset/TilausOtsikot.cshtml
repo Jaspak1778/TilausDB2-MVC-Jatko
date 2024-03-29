@@ -11,30 +11,38 @@
 
 <h2>Tilaus Otsikot</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        <div class="container">
+            <div class="row omahead">
+                <div class="col">
+                    Tilaus id
+                </div>
+                <div class="col">
+                    Asiakas
+                </div>
+                <div class="col">
+                    Toimitusosoite
+                </div>
+                <div class="col">
+                    Postinumero
+                </div>
+                <div class="col-2">
+                    Päiväys 
+                    @if (@ViewBag.Text == "Default")
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            OrderID
-        </div>
-        <div class="col">
-            Asiakas
-        </div>
-        <div class="col">
-            Toimitusosoite
-        </div>
-        <div class="col">
-            Postinumero
-        </div>
-        <div class="col">
-            Date
-        </div>
-    </div>
-</div>
+                    {
+                       <a href="@Url.Action("TilausOtsikot", new { sortOrder = ViewBag.Päiväys, currentFilter1 = ViewBag.currentFilter1 })" aria-label="SortOrder"><img src="~/Icons/graph-up-arrow.svg" width="22" height="22" /></a>
 
+                    }else 
+                    {
+                        <a href="@Url.Action("TilausOtsikot", new { sortOrder = ViewBag.Päiväys, currentFilter1 = ViewBag.currentFilter1 })" aria-label="SortOrder"><img src="~/Icons/graph-down-arrow.svg" width="22" height="22" /></a>
+                    }
+
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-outline-dark data-toggle="tooltip" data-placement="right" title="Lisää tilaus" " href="/Tilaukset/Create"><img src="~/Icons/plus.svg" width="12" height="12" /></a>
+                </div>
+            </div>
+        </div>
 <div class="accordion" id="accordionExample">
     @foreach (var item in Model)
     {
@@ -60,37 +68,37 @@
                                     @{
                                         var formattedDate = item.Tilauspvm?.ToString("dd MMMM, yyyy");
                                         @formattedDate
-                                }
-                            </p>
+                                    }
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </button>
-        </h2>
-        <div id="collapse@(item.TilausID)" class="accordion-collapse collapse" aria-labelledby="heading@(item.TilausID)" data-bs-parent="#accordionExample">
-            <a class="btn btn-outline-dark" href="/Tilaukset/_TilausRivit/?orderid=@item.TilausID"><img src="~/Icons/three-dots.svg" width="32" height="32" /></a>
-            <div class="accordion-body">
-                <div id="orderDetails_@(item.TilausID)">
+                </button>
+            </h2>
+            <div id="collapse@(item.TilausID)" class="accordion-collapse collapse" aria-labelledby="heading@(item.TilausID)" data-bs-parent="#accordionExample">
+                <a class="btn btn-outline-dark" href="/Tilaukset/_TilausRivit/?orderid=@item.TilausID">Debug tilausrivi</a>
+                <div class="accordion-body">
+                    <div id="orderDetails_@(item.TilausID)">
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
 </div>
 
 @section scripts {
     <script>
-                $(function () {
-                    $(".accordion-button").click(function () {
-                        let orderId = $(this).closest(".accordion-item").find(".accordion-header").attr("id").substring(7);
-                        var url = "/Tilaukset/_TilausRivit/?orderid=" + orderId;
-                        var $orderDetails = $(this).closest(".accordion-item").find(".accordion-body #orderDetails_" + orderId);
-                        $orderDetails.empty().append(" <b>Ladataan tilauksen " + orderId + " rivejä...</b>");
-                        $.get(url, function (data) {
-                            $orderDetails.html(data);
-                        });
-                    });
+        $(function () {
+            $(".accordion-button").click(function () {
+                let orderId = $(this).closest(".accordion-item").find(".accordion-header").attr("id").substring(7);
+                var url = "/Tilaukset/_TilausRivit/?orderid=" + orderId;
+                var $orderDetails = $(this).closest(".accordion-item").find(".accordion-body #orderDetails_" + orderId);
+                $orderDetails.empty().append(" <b>Ladataan tilauksen " + orderId + " rivejä...</b>");
+                $.get(url, function (data) {
+                    $orderDetails.html(data);
                 });
+            });
+        });
     </script>
 }
