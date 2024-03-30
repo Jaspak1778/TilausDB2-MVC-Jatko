@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Web.Mvc;
 
 using TilausDB2.Models;
+using System.Drawing;
 
 
 namespace TilausDB2.Controllers
@@ -17,27 +18,54 @@ namespace TilausDB2.Controllers
 
         public ActionResult Index()
         {
-            // Fetch data from dbo.Myynnit table
+            #region statistiikka1
             var salesData = db.Myynnit.ToList();
 
-            // Fetch data from dbo.Sivustolla_vierailijat table
+            // Haetaan Sivustolla_vierailijat 
             var visitorData = db.Sivustolla_vierailijat.ToList();
 
-            // Join the two datasets based on the common key Vuosi
+            // Yhdistetään avaimella Vuosi
             var joinedData = from s in salesData
                              join v in visitorData on s.Vuosi equals v.Vuosi
                              select new { Vuosi = s.Vuosi, Kokonaismyynti = s.Kokonaismyynti, Vierailijat = v.Vierailijat };
 
-            // Prepare data for the chart
+            // Kootaan data
+            //joinedData.Select <-- tällä voidaan viitata haluttuun propertyyn datasta joka on tässä tapauksessa kooste (>JOIN)
             var labels = joinedData.Select(d => d.Vuosi.ToString()).ToArray();
             var sales = joinedData.Select(d => d.Kokonaismyynti).ToArray();
             var visitors = joinedData.Select(d => d.Vierailijat).ToArray();
-
-            // Pass data to the view
+            
+            // Viedään dataa ViewBagien kautta.
             ViewBag.Labels = labels;
             ViewBag.SalesData = sales;
             ViewBag.VisitorData = visitors;
-            
+
+            #endregion
+
+            #region statistiikka2
+            //ForeignerData.Select <-- tällä voidaan viitata haluttuun propertyyn tietokanta taulussa.
+            var ForeignerData = db.Vierailija_kohde.ToList();
+            var Maa = ForeignerData.Select(d => d.Maa.ToString()).ToArray();
+            var kaupunki = ForeignerData.Select(d => d.Kaupunki.ToString()).ToArray();
+            var henkilomaara = ForeignerData.Select(d => d.Henkilomaara).ToArray();
+            #endregion
+
+            #region statistiikka 3
+            var groupedData = ForeignerData
+            .GroupBy(d => d.Maa)
+            .Select(group => new { Maa = group.Key, TotalHenkilomaara = group.Sum(d => d.Henkilomaara) })
+            .ToList();
+
+            var maa = groupedData.Select(d => d.Maa).ToArray();
+            var totalHenkilomaara = groupedData.Select(d => d.TotalHenkilomaara).ToArray();
+
+            #endregion
+            ViewBag.maa = maa;
+            ViewBag.Maa = Maa;
+            ViewBag.Kaupunki = kaupunki;
+            ViewBag.HenkilöLKM = henkilomaara;
+            ViewBag.TotalHenkilomaara = totalHenkilomaara;
+
             ViewBag.LoginError = 0; //Ei pakoteta modaalia login-ruutua tässä kohden, vaan pelkästään, jos on yritetty kirjautua ja kirjautuminen on epäonnistunut
             return View();
         }

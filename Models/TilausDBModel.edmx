@@ -5,19 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TilauksetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Tilaukset.dbo.Asetukset' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Asetukset">
-          <Property Name="Yrityksen_nimi" Type="nvarchar" MaxLength="50" />
-          <Property Name="Osoite" Type="nvarchar" MaxLength="50" />
-          <Property Name="Postinumero" Type="numeric" Precision="30" Scale="0" />
-          <Property Name="Puhelin" Type="varchar" MaxLength="50" />
-          <Property Name="sähköposti" Type="nvarchar" MaxLength="50" />
-          <Property Name="asetus_1" Type="varchar" MaxLength="50" />
-          <Property Name="asetus_2" Type="varchar" MaxLength="50" />
-          <Property Name="infoc_1" Type="nvarchar" MaxLength="50" />
-          <Property Name="infoc_2" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
         <EntityType Name="Asiakkaat">
           <Key>
             <PropertyRef Name="AsiakasID" />
@@ -103,13 +90,15 @@ warning 6013: The table/view 'Tilaukset.dbo.Asetukset' does not have a primary k
           <Property Name="Lisätieto_1" Type="nvarchar" MaxLength="100" />
           <Property Name="Lisätieto_2" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Tilaukset.dbo.Vierailija_kohde' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Vierailija_kohde">
+          <Key>
+            <PropertyRef Name="RiviID" />
+          </Key>
           <Property Name="Maa" Type="nvarchar" MaxLength="50" />
           <Property Name="Kaupunki" Type="nvarchar" MaxLength="50" />
           <Property Name="Henkilomaara" Type="float" />
-        </EntityType>-->
+          <Property Name="RiviID" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Asiakkaat_Postitoimipaikat">
           <End Role="Postitoimipaikat" Type="Self.Postitoimipaikat" Multiplicity="0..1" />
           <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="*" />
@@ -168,6 +157,7 @@ warning 6013: The table/view 'Tilaukset.dbo.Vierailija_kohde' does not have a pr
           <EntitySet Name="Tilaukset" EntityType="Self.Tilaukset" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tilausrivit" EntityType="Self.Tilausrivit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vierailija_kohde" EntityType="Self.Vierailija_kohde" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Asiakkaat_Postitoimipaikat" Association="Self.FK_Asiakkaat_Postitoimipaikat">
             <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
             <End Role="Asiakkaat" EntitySet="Asiakkaat" />
@@ -364,6 +354,7 @@ warning 6013: The table/view 'Tilaukset.dbo.Vierailija_kohde' does not have a pr
             <End Role="Sivustolla_vierailijat" EntitySet="Sivustolla_vierailijat" />
             <End Role="Myynnit" EntitySet="Myynnit" />
           </AssociationSet>
+          <EntitySet Name="Vierailija_kohde" EntityType="TilauksetModel.Vierailija_kohde" />
         </EntityContainer>
         <EntityType Name="Myynnit">
           <Key>
@@ -393,6 +384,15 @@ warning 6013: The table/view 'Tilaukset.dbo.Vierailija_kohde' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Vierailija_kohde">
+          <Key>
+            <PropertyRef Name="RiviID" />
+          </Key>
+          <Property Name="Maa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kaupunki" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Henkilomaara" Type="Double" />
+          <Property Name="RiviID" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -490,6 +490,16 @@ warning 6013: The table/view 'Tilaukset.dbo.Vierailija_kohde' does not have a pr
               <MappingFragment StoreEntitySet="Sivustolla_vierailijat">
                 <ScalarProperty Name="Vuosi" ColumnName="Vuosi" />
                 <ScalarProperty Name="Vierailijat" ColumnName="Vierailijat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vierailija_kohde">
+            <EntityTypeMapping TypeName="TilauksetModel.Vierailija_kohde">
+              <MappingFragment StoreEntitySet="Vierailija_kohde">
+                <ScalarProperty Name="RiviID" ColumnName="RiviID" />
+                <ScalarProperty Name="Henkilomaara" ColumnName="Henkilomaara" />
+                <ScalarProperty Name="Kaupunki" ColumnName="Kaupunki" />
+                <ScalarProperty Name="Maa" ColumnName="Maa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

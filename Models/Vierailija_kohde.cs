@@ -12,12 +12,11 @@ namespace TilausDB2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Logins
+    public partial class Vierailija_kohde
     {
-        public int LoginId { get; set; }
-        public string UserName { get; set; }
-        public string PassWord { get; set; }
-        public Nullable<int> admin { get; set; }
-        public string LoginErrorMessage {  get; set; }
+        public string Maa { get; set; }
+        public string Kaupunki { get; set; }
+        public Nullable<double> Henkilomaara { get; set; }
+        public string RiviID { get; set; }
     }
 }

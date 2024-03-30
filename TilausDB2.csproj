@@ -188,6 +188,9 @@
     <Compile Include="Models\Tuotteet.cs">
       <DependentUpon>TilausDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Vierailija_kohde.cs">
+      <DependentUpon>TilausDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="OrderRows.cs" />
     <Compile Include="OrderSummaryData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

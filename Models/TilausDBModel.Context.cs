@@ -34,5 +34,6 @@ namespace TilausDB2.Models
         public virtual DbSet<Tuotteet> Tuotteet { get; set; }
         public virtual DbSet<Myynnit> Myynnit { get; set; }
         public virtual DbSet<Sivustolla_vierailijat> Sivustolla_vierailijat { get; set; }
+        public virtual DbSet<Vierailija_kohde> Vierailija_kohde { get; set; }
     }
 }
