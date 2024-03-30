@@ -23,15 +23,15 @@
                 <div class="row">
                     <div class="col-5">
                         
-                        <a class="badge bg-success" href="@Url.Action("Index", new { sortOrder = ViewBag.ProductNameSortParm, currentFilter1 = ViewBag.currentFilter1 })" aria-label="SortOrder">Järjestä tuotteen nimellä</a>
-                        <a class="badge bg-success" href="@Url.Action("Index", new { sortOrder = ViewBag.UnitPriceSortParm, currentFilter1 = ViewBag.currentFilter1 })" aria-label="SortOrder">Järjestä hinnan mukaan</a>
+                        <a class="badge bg-primary" href="@Url.Action("Index", new { sortOrder = ViewBag.ProductNameSortParm, currentFilter1 = ViewBag.currentFilter1 })" aria-label="SortOrder">Järjestä tuotteen nimellä</a>
+                        <a class="badge bg-primary" href="@Url.Action("Index", new { sortOrder = ViewBag.UnitPriceSortParm, currentFilter1 = ViewBag.currentFilter1 })" aria-label="SortOrder">Järjestä hinnan mukaan</a>
                     </div>
                     <div class="col-6 style=" display:inline"">
                         @Html.TextBox("searchString1", ViewBag.currentFilter1 as string, new { @class = "form-control", style = "width:200px; display:inline" })
-                        <input style="height:37px; width:112px" class="btn btn-success btm-sm form-control" type="submit" value="Etsi" />
+                        <input style="height:37px; width:112px" class="btn btn-primary btm-sm form-control" type="submit" value="Etsi" />
                     </div>
                     <div class="col">
-                        <a class="badge bg-success" data-toggle="tooltip" data-placement="bottom" title="Lisää tuote" href="/Tuotteet/Create"><img src="~/Icons/plus.svg" width="24" height="24" aria-label="Luo" />    Tuote</a>
+                        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Lisää tuote" href="/Tuotteet/Create"><img src="~/Icons/plus.svg" width="24" height="24" aria-label="Luo" />    Tuote</a>
                     </div>
                 </div>
             </th>

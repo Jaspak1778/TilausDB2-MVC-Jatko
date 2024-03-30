@@ -12,12 +12,11 @@ namespace TilausDB2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Logins
+    public partial class Myynnit
     {
-        public int LoginId { get; set; }
-        public string UserName { get; set; }
-        public string PassWord { get; set; }
-        public Nullable<int> admin { get; set; }
-        public string LoginErrorMessage { get; set; }
+        public int Vuosi { get; set; }
+        public Nullable<decimal> Kokonaismyynti { get; set; }
+    
+        public virtual Sivustolla_vierailijat Sivustolla_vierailijat { get; set; }
     }
 }

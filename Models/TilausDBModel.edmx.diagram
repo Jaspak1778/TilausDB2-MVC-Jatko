@@ -17,6 +17,9 @@
         <AssociationConnector Association="TilauksetModel.FK_Tilaukset_Postitoimipaikat" ManuallyRouted="false" />
         <AssociationConnector Association="TilauksetModel.FK_Tilausrivit_Tilaukset" ManuallyRouted="false" />
         <AssociationConnector Association="TilauksetModel.FK_Tilausrivit_Tuotteet" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TilauksetModel.Myynnit" Width="1.5" PointX="9.625" PointY="7.875" />
+        <EntityTypeShape EntityType="TilauksetModel.Sivustolla_vierailijat" Width="1.5" PointX="7.375" PointY="7.875" />
+        <AssociationConnector Association="TilauksetModel.FK_Myynnit_Sivustolla_vierailijat" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

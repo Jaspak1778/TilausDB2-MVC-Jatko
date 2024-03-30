@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TilausDB2.ViewModels.OrderSummaryData>
+
+@{
+    ViewBag.Title = "Ordersummary";
+}
+
+<h2>Ordersummary</h2>
+
+
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.TilausID)</th>
+        <th>@Html.DisplayNameFor(model => model.AsiakasID)</th>
+        <th>@Html.DisplayNameFor(model => model.Tilauspvm)</th>
+        <th>@Html.DisplayNameFor(model => model.Toimituspvm)</th>
+        <th>@Html.DisplayNameFor(model => model.Toimitusosoite)</th>
+        <th>@Html.DisplayNameFor(model => model.Postinumero)</th>
+        <th>@Html.DisplayNameFor(model => model.TuoteID)</th>
+        <th>@Html.DisplayNameFor(model => model.Ahinta)</th>
+        <th>@Html.DisplayNameFor(model => model.Maara)</th>
+        <th>@Html.DisplayNameFor(model => model.Nimi)</th>
+        <th>@Html.DisplayNameFor(model => model.Lisätieto_1)</th>
+        <th>@Html.DisplayNameFor(model => model.Lisätieto_2)</th>
+        <th>@Html.DisplayNameFor(model => model.Kuva)</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.TilausID)</td>
+            <td>@Html.DisplayFor(modelItem => item.AsiakasID)</td>
+            <td>@Html.DisplayFor(modelItem => item.Tilauspvm)</td>
+            <td>@Html.DisplayFor(modelItem => item.Toimituspvm)</td>
+            <td>@Html.DisplayFor(modelItem => item.Toimitusosoite)</td>
+            <td>@Html.DisplayFor(modelItem => item.Postinumero)</td>
+            <td>@Html.DisplayFor(modelItem => item.TuoteID)</td>
+            <td>@Html.DisplayFor(modelItem => item.Ahinta)</td>
+            <td>@Html.DisplayFor(modelItem => item.Maara)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nimi)</td>
+            <td>@Html.DisplayFor(modelItem => item.Lisätieto_1)</td>
+            <td>@Html.DisplayFor(modelItem => item.Lisätieto_2)</td>
+            <td class="col"><a href="@item.Kuva" ; target="_blank"><img style="height: 130px; width: 130px; display: block;" src="@item.Kuva" /><img /></a></td>
+
+            <td>
+                <a class="btn btn-outline-dark" href="/Orders/Edit?id=@item.TilausID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+                <a class="btn btn-outline-dark" href="/Orders/Details?id=@item.TilausID"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+                <a class="btn btn-outline-dark" href="/Orders/Delete?id=@item.TilausID"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,33 +1,129 @@
-﻿@{
-    ViewBag.Title = "Aloitus";
-}
+﻿﻿@model TilausDB2.Models.Logins
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+    @{
+        ViewBag.Title = "Kotisivu";
+    }
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
-    </div>
-</main>
+    <style>
+        body {
+            background-color: rgba(215, 115, 30, 0.06);
+        }
+    </style>
+
+    <body>
+
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+
+                        <h4 style="text-shadow:3px 3px white">TilausDB hallinta</h4>
+                        <br />
+
+                        @if (Session["UserName"] == null)
+                        {
+                            <div class="table table-hover; row mb-1">
+                                <a class="btn btn-primary" id="LoginButton">Kirjaudu</a>
+                                <p></p>
+                                <a class="btn btn-primary" href="/Products/CardIndex"> Esittelynäkymä </a>
+                                <p></p>
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="table table-hover; row mb-1">
+                                <a class="btn btn-primary" href="/Products/CardIndex">Esittelynäkymä </a>
+                                <p></p>
+                                <a class="btn btn-primary" href="/Customers/Index"> Asiakkaat </a>
+                                <p></p>
+                                <a class="btn btn-primary" href="/Customers/Create">Lisää asiakas </a>
+                                <p></p>
+                                <a class="btn btn-primary" href="/Products/Index"> Tuotteet </a>
+                                <p></p>
+                                <a class="btn btn-primary" href="/Products/Create"> Lisää tuote </a>
+                                <p></p>
+                                <a class="btn btn-primary" href="/Orders/Index"> Tilaukset </a>
+                                <p></p>
+                                <a class="btn btn-primary" href="/Orders/TilausOtsikot"> Tilausotsikot </a>
+                                <p></p>
+                                <a class="btn btn-primary" href="/Orders/_TilausRivit"> Tilausrivit </a>
+
+                            </div>
+                        }
+                    </div>
+                    <div class="col-10">
+                        <canvas id="myChart" width="200" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </body>
+
+
+    @section scripts {
+        @* Modal login *@
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#LoginButton').click(function () {
+                    $('#LoginRuutu').modal('show');
+                });
+
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+
+        @* Chart *@
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                // Retrieve data passed from controller
+                var labels = @Html.Raw(Json.Encode(ViewBag.Labels));
+                var salesData = @Html.Raw(Json.Encode(ViewBag.SalesData));
+                var visitorData = @Html.Raw(Json.Encode(ViewBag.VisitorData));
+
+                console.log(labels);
+                console.log(salesData);
+                console.log(visitorData);
+
+                // Create a new chart instance
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Kokonaismyynti',
+                            data: salesData,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: 'Vierailijat',
+                            data: visitorData,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+
+                    }
+                });
+            </script>
+
+    }
+    @{Html.RenderPartial("_LoginModal");}
+
+

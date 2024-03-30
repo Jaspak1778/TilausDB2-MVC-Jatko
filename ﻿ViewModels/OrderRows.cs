@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Drawing;
 
 namespace TilausDB2.ViewModels
 {
-    using System;
-    using System.Drawing;
     public class OrderRows
     {
         public int TilausID { get; set; }

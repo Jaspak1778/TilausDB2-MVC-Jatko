@@ -5,6 +5,19 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TilauksetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Tilaukset.dbo.Asetukset' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Asetukset">
+          <Property Name="Yrityksen_nimi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Osoite" Type="nvarchar" MaxLength="50" />
+          <Property Name="Postinumero" Type="numeric" Precision="30" Scale="0" />
+          <Property Name="Puhelin" Type="varchar" MaxLength="50" />
+          <Property Name="sähköposti" Type="nvarchar" MaxLength="50" />
+          <Property Name="asetus_1" Type="varchar" MaxLength="50" />
+          <Property Name="asetus_2" Type="varchar" MaxLength="50" />
+          <Property Name="infoc_1" Type="nvarchar" MaxLength="50" />
+          <Property Name="infoc_2" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
         <EntityType Name="Asiakkaat">
           <Key>
             <PropertyRef Name="AsiakasID" />
@@ -37,12 +50,26 @@
           <Property Name="PassWord" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="admin" Type="int" />
         </EntityType>
+        <EntityType Name="Myynnit">
+          <Key>
+            <PropertyRef Name="Vuosi" />
+          </Key>
+          <Property Name="Vuosi" Type="int" Nullable="false" />
+          <Property Name="Kokonaismyynti" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
         <EntityType Name="Postitoimipaikat">
           <Key>
             <PropertyRef Name="Postinumero" />
           </Key>
           <Property Name="Postinumero" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="Postitoimipaikka" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sivustolla_vierailijat">
+          <Key>
+            <PropertyRef Name="Vuosi" />
+          </Key>
+          <Property Name="Vierailijat" Type="int" />
+          <Property Name="Vuosi" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tilaukset">
           <Key>
@@ -76,6 +103,13 @@
           <Property Name="Lisätieto_1" Type="nvarchar" MaxLength="100" />
           <Property Name="Lisätieto_2" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Tilaukset.dbo.Vierailija_kohde' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Vierailija_kohde">
+          <Property Name="Maa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kaupunki" Type="nvarchar" MaxLength="50" />
+          <Property Name="Henkilomaara" Type="float" />
+        </EntityType>-->
         <Association Name="FK_Asiakkaat_Postitoimipaikat">
           <End Role="Postitoimipaikat" Type="Self.Postitoimipaikat" Multiplicity="0..1" />
           <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="*" />
@@ -85,6 +119,18 @@
             </Principal>
             <Dependent Role="Asiakkaat">
               <PropertyRef Name="Postinumero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Myynnit_Sivustolla_vierailijat">
+          <End Role="Sivustolla_vierailijat" Type="Self.Sivustolla_vierailijat" Multiplicity="1" />
+          <End Role="Myynnit" Type="Self.Myynnit" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Sivustolla_vierailijat">
+              <PropertyRef Name="Vuosi" />
+            </Principal>
+            <Dependent Role="Myynnit">
+              <PropertyRef Name="Vuosi" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -112,41 +158,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tilausrivit_Tilaukset">
-          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="0..1" />
-          <End Role="Tilausrivit" Type="Self.Tilausrivit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tilaukset">
-              <PropertyRef Name="TilausID" />
-            </Principal>
-            <Dependent Role="Tilausrivit">
-              <PropertyRef Name="TilausID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tilausrivit_Tuotteet">
-          <End Role="Tuotteet" Type="Self.Tuotteet" Multiplicity="0..1" />
-          <End Role="Tilausrivit" Type="Self.Tilausrivit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tuotteet">
-              <PropertyRef Name="TuoteID" />
-            </Principal>
-            <Dependent Role="Tilausrivit">
-              <PropertyRef Name="TuoteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="TilauksetModelStoreContainer">
           <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Henkilot" EntityType="Self.Henkilot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Myynnit" EntityType="Self.Myynnit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Postitoimipaikat" EntityType="Self.Postitoimipaikat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sivustolla_vierailijat" EntityType="Self.Sivustolla_vierailijat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tilaukset" EntityType="Self.Tilaukset" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tilausrivit" EntityType="Self.Tilausrivit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Asiakkaat_Postitoimipaikat" Association="Self.FK_Asiakkaat_Postitoimipaikat">
             <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
             <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Myynnit_Sivustolla_vierailijat" Association="Self.FK_Myynnit_Sivustolla_vierailijat">
+            <End Role="Sivustolla_vierailijat" EntitySet="Sivustolla_vierailijat" />
+            <End Role="Myynnit" EntitySet="Myynnit" />
           </AssociationSet>
           <AssociationSet Name="FK_Tilaukset_Asiakkaat" Association="Self.FK_Tilaukset_Asiakkaat">
             <End Role="Asiakkaat" EntitySet="Asiakkaat" />
@@ -155,14 +183,6 @@
           <AssociationSet Name="FK_Tilaukset_Postitoimipaikat" Association="Self.FK_Tilaukset_Postitoimipaikat">
             <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
             <End Role="Tilaukset" EntitySet="Tilaukset" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tilausrivit_Tilaukset" Association="Self.FK_Tilausrivit_Tilaukset">
-            <End Role="Tilaukset" EntitySet="Tilaukset" />
-            <End Role="Tilausrivit" EntitySet="Tilausrivit" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tilausrivit_Tuotteet" Association="Self.FK_Tilausrivit_Tuotteet">
-            <End Role="Tuotteet" EntitySet="Tuotteet" />
-            <End Role="Tilausrivit" EntitySet="Tilausrivit" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -338,7 +358,41 @@
             <End Role="Tuotteet" EntitySet="Tuotteet" />
             <End Role="Tilausrivit" EntitySet="Tilausrivit" />
           </AssociationSet>
+          <EntitySet Name="Myynnit" EntityType="TilauksetModel.Myynnit" />
+          <EntitySet Name="Sivustolla_vierailijat" EntityType="TilauksetModel.Sivustolla_vierailijat" />
+          <AssociationSet Name="FK_Myynnit_Sivustolla_vierailijat" Association="TilauksetModel.FK_Myynnit_Sivustolla_vierailijat">
+            <End Role="Sivustolla_vierailijat" EntitySet="Sivustolla_vierailijat" />
+            <End Role="Myynnit" EntitySet="Myynnit" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Myynnit">
+          <Key>
+            <PropertyRef Name="Vuosi" />
+          </Key>
+          <Property Name="Vuosi" Type="Int32" Nullable="false" />
+          <Property Name="Kokonaismyynti" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Sivustolla_vierailijat" Relationship="TilauksetModel.FK_Myynnit_Sivustolla_vierailijat" FromRole="Myynnit" ToRole="Sivustolla_vierailijat" />
+        </EntityType>
+        <EntityType Name="Sivustolla_vierailijat">
+          <Key>
+            <PropertyRef Name="Vuosi" />
+          </Key>
+          <Property Name="Vierailijat" Type="Int32" />
+          <Property Name="Vuosi" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Myynnit" Relationship="TilauksetModel.FK_Myynnit_Sivustolla_vierailijat" FromRole="Sivustolla_vierailijat" ToRole="Myynnit" />
+        </EntityType>
+        <Association Name="FK_Myynnit_Sivustolla_vierailijat">
+          <End Type="TilauksetModel.Sivustolla_vierailijat" Role="Sivustolla_vierailijat" Multiplicity="1" />
+          <End Type="TilauksetModel.Myynnit" Role="Myynnit" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Sivustolla_vierailijat">
+              <PropertyRef Name="Vuosi" />
+            </Principal>
+            <Dependent Role="Myynnit">
+              <PropertyRef Name="Vuosi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -420,6 +474,22 @@
                 <ScalarProperty Name="Kuva" ColumnName="Kuva" />
                 <ScalarProperty Name="Lisätieto_1" ColumnName="Lisätieto_1" />
                 <ScalarProperty Name="Lisätieto_2" ColumnName="Lisätieto_2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Myynnit">
+            <EntityTypeMapping TypeName="TilauksetModel.Myynnit">
+              <MappingFragment StoreEntitySet="Myynnit">
+                <ScalarProperty Name="Kokonaismyynti" ColumnName="Kokonaismyynti" />
+                <ScalarProperty Name="Vuosi" ColumnName="Vuosi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sivustolla_vierailijat">
+            <EntityTypeMapping TypeName="TilauksetModel.Sivustolla_vierailijat">
+              <MappingFragment StoreEntitySet="Sivustolla_vierailijat">
+                <ScalarProperty Name="Vuosi" ColumnName="Vuosi" />
+                <ScalarProperty Name="Vierailijat" ColumnName="Vierailijat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 
-namespace TilausDB2.ViewModels
+namespace TilausDB2._ViewModels
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Drawing;
+
     public class OrderSummaryData
     {
         public int TilausID { get; set; }
         public int AsiakasID { get; set; }
         public Nullable<System.DateTime> Tilauspvm { get; set; }
-        public Nullable<System.DateTime> Toimituspvm { get; set; }
-        public string Toimitusosoite { get; set; }
+        public Nullable<System.DateTime> Tomituspvm { get; set; }
+        public string Tomitusosoite { get; set; }
         public string Postinumero { get; set; }
         public int TuoteID{ get; set; }
         public float Ahinta { get; set; }

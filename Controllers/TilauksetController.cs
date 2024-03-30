@@ -13,7 +13,7 @@ namespace TilausDB2.Controllers
 {
     public class TilauksetController : Controller
     {
-        private TilauksetEntity db = new TilauksetEntity();
+        private readonly TilauksetEntity db = new TilauksetEntity();
 
         // GET: Tilaukset
         public ActionResult Index()
@@ -162,9 +162,37 @@ namespace TilausDB2.Controllers
             base.Dispose(disposing);
         }
 
+        #region OrderSummary
+        public ActionResult Ordersummary()
+        {
+            var orderSummary = from o in db.Tilaukset
+                               join od in db.Tilausrivit on o.TilausID equals od.TilausID
+                               join p in db.Tuotteet on od.TuoteID equals p.TuoteID
+                               select new OrderSummaryData
+                               {
+                                   TilausID = o.TilausID,
+                                   AsiakasID = (int)o.AsiakasID,
+                                   Tilauspvm = (DateTime)o.Tilauspvm,
+                                   Toimituspvm = (DateTime)o.Toimituspvm,
+                                   Toimitusosoite = o.Toimitusosoite,
+                                   Postinumero = o.Postinumero,
+                                   TuoteID = p.TuoteID,
+                                   Ahinta = (float)p.Ahinta,
+                                   Maara = (int)od.Maara,
+                                   Nimi = p.Nimi,
+                                   Lisätieto_1 = (string)p.Lisätieto_1,
+                                   Lisätieto_2 = (string)p.Lisätieto_1,
+                                   Kuva = (string)p.Kuva
+                               };
+
+
+            return View(orderSummary);
+        }
+        #endregion
+
         #region Tilausrivit
 
-        public ActionResult _TilausRivit(int? orderid)
+        public ActionResult PTilausRivit(int? orderid)
         {
             if ((orderid == null) || (orderid == 0))
             {
@@ -181,7 +209,7 @@ namespace TilausDB2.Controllers
                                     {
                                         TilausID = (int)od.TilausID,
                                         TuoteID = p.TuoteID,
-                                        Ahinta = (float)p.Ahinta,
+                                        Ahinta = (float)od.Ahinta,
                                         Maara = (int)od.Maara,
                                         Nimi = p.Nimi,
                                         

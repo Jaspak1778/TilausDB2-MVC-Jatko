@@ -15,8 +15,8 @@ namespace TilausDB2.Models
     public partial class Tilausrivit
     {
         public int TilausriviID { get; set; }
-        public int TilausID { get; set; }
-        public int TuoteID { get; set; }
+        public Nullable<int> TilausID { get; set; }
+        public Nullable<int> TuoteID { get; set; }
         public Nullable<int> Maara { get; set; }
         public Nullable<decimal> Ahinta { get; set; }
     
