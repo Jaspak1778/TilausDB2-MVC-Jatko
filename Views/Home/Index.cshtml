@@ -4,11 +4,6 @@
     ViewBag.Title = "Kotisivu";
 }
 
-<style>
-    body {
-        background-color: rgba(215, 115, 30, 0.06);
-    }
-</style>
 
 <body>
 
@@ -25,7 +20,7 @@
                         <div class="table table-hover; row mb-1">
                             <a class="btn btn-primary" id="LoginButton">Kirjaudu</a>
                             <p></p>
-                            <a class="btn btn-primary" href="/Products/CardIndex"> Esittelynäkymä </a>
+                            <a class="btn btn-primary" href="/Tuotteet/CardIndex"> Esittelynäkymä </a>
                             <p></p>
                             <br />
                             <br />
@@ -37,31 +32,43 @@
                         <div class="table table-hover; row mb-1">
                             <a class="btn btn-primary" href="/Products/CardIndex">Esittelynäkymä </a>
                             <p></p>
-                            <a class="btn btn-primary" href="/Customers/Index"> Asiakkaat </a>
+                            <a class="btn btn-primary" href="/Asiakkaat/Index"> Asiakkaat </a>
                             <p></p>
-                            <a class="btn btn-primary" href="/Customers/Create">Lisää asiakas </a>
+                            <a class="btn btn-primary" href="/Asiakkaat/Create">Lisää asiakas </a>
                             <p></p>
-                            <a class="btn btn-primary" href="/Products/Index"> Tuotteet </a>
+                            <a class="btn btn-primary" href="/Tuotteet/Index"> Tuotteet </a>
                             <p></p>
-                            <a class="btn btn-primary" href="/Products/Create"> Lisää tuote </a>
+                            <a class="btn btn-primary" href="/Tuotteet/Create"> Lisää tuote </a>
                             <p></p>
-                            <a class="btn btn-primary" href="/Orders/Index"> Tilaukset </a>
+                            <a class="btn btn-primary" href="/Tilaukset/Index"> Tilaukset </a>
                             <p></p>
-                            <a class="btn btn-primary" href="/Orders/TilausOtsikot"> Tilausotsikot </a>
+                            <a class="btn btn-primary" href="/Tilaukset/TilausOtsikot"> Tilausotsikot </a>
                             <p></p>
-                            <a class="btn btn-primary" href="/Orders/_TilausRivit"> Tilausrivit </a>
+                       
 
                         </div>
                     }
                 </div>
                 <div class="col-10">
-                    <h3>Myynti ja vierailijat vuositasolla</h3>
-                    <canvas id="myChart" width="200" height="100"></canvas>
-                    <h3>Vierailijat maittain</h3>
-                    <canvas id="myChart2" width="200" height="100"></canvas>
-                    <h3>Vierailijat kaupungittain</h3>
-                    <canvas id="myChart3" width="200" height="100"></canvas>
-
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-8"><h3>Myynti ja vierailijat vuositasolla</h3></div>
+                        <canvas id="myChart" width="200" height="100"></canvas>
+                    </div>
+                    <br />
+                  
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-8"><h3>Vierailijat maittain</h3></div>
+                        <canvas id="myChart2" width="200" height="100"></canvas>
+                    </div>
+                    <br />
+                 
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-8"><h3>Vierailijat kaupungittain</h3></div>
+                        <canvas id="myChart3" width="200" height="100"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,6 +110,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
+                        axis: 'y',
                         label: 'Kokonaismyynti',
                         data: salesData,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -117,10 +125,15 @@
                     }]
                 },
                 options: {
+                    indexAxis: 'y', 
                     scales: {
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true
+                            },
+                            title: {
+                                display: true,
+                                labelString: 'Custom Chart Title'
                             }
                         }]
                     }
@@ -146,7 +159,7 @@
                 data: {
                     labels: ['Suomi', 'Italia', 'Saksa', 'Ruotsi', 'Tanska'],
                     datasets: [{
-                        label: 'Kaupunki',
+                        label: 'Henkilömäärä',
                         data: TotalHenkilomaara,
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 1)',

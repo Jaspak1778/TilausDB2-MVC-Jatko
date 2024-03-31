@@ -1,58 +1,53 @@
 ﻿@model TilausDB2.Models.Tilaukset
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Lisätiedot";
 }
-
-<h2>Details</h2>
-
 <div>
-    <h4>Tilaukset</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Toimitusosoite)
-        </dt>
+    <h3>Erittely</h3>
+    <p></p>
+    <h5>Tilaus: ID @Html.DisplayFor(model => model.TilausID)</h5>
+    <p></p>
+    <h6>Tilaaja: @Html.DisplayFor(model => model.Asiakkaat.Nimi)</h6>
+    <p></p>
+    <h6>Tomitusosoite: @Html.DisplayFor(model => model.Asiakkaat.Osoite)</h6>
+    <p></p>
+    <h6>Postinumero: @Html.DisplayFor(model => model.Asiakkaat.Postinumero)</h6>
+    <p></p>
+    <h6>Postitoimipaikka: @Html.DisplayFor(model => model.Postitoimipaikat.Postitoimipaikka)</h6>
+    <p></p>
+    <h6>Tilauspvm: @Html.DisplayFor(model => model.Tilauspvm)</h6>
+    <p></p>
+    <h6>Toimituspvm: @Html.DisplayFor(model => model.Toimituspvm)</h6>
 
-        <dd>
-            @Html.DisplayFor(model => model.Toimitusosoite)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Tilauspvm)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tilauspvm)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Toimituspvm)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Toimituspvm)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Asiakkaat.Nimi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Asiakkaat.Nimi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Postitoimipaikat.Postitoimipaikka)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Postitoimipaikat.Postitoimipaikka)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TilausID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<table class="table">
+    <tr>
+        <th>Tilausrivi ID</th>
+        <th>Tuotteet</th>
+        <th>Määrä</th>
+        <th>Yhteensä</th>
+    </tr>
+
+    @foreach (var tilausrivi in Model.Tilausrivit)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => tilausrivi.TilausriviID)</td>
+            <td>@Html.DisplayFor(modelItem => tilausrivi.Tuotteet.Nimi)</td>
+            <td>@Html.DisplayFor(modelItem => tilausrivi.Maara)</td>
+            <td>
+                @{
+                    var yht = tilausrivi.Maara * tilausrivi.Ahinta;
+                }
+                @Html.DisplayFor(modelItem => yht)
+            </td>
+            <td>
+                <a class="btn btn-primary btm-sm" href="/Tilausrivitdb/Edit?id=@tilausrivi.TilausriviID">Muokkaa</a>
+                <a class="btn btn-danger btm-sm" href="/Tilausrivitdb/Delete?id=@tilausrivi.TilausriviID">Poista</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="row-cols-6"><a class="btn btn-primary btm-sm" href="javascript:void(0);" onclick="history.go(-1);">Takaisin</a></div>

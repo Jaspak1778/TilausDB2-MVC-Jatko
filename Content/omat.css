@@ -19,3 +19,10 @@
     white-space: nowrap;
 }
 
+body {
+    background-color: rgba(215, 115, 30, 0.06);
+}
+
+.grad {
+    background-image: linear-gradient(to bottom right, red, yellow)!important;
+}
