@@ -17,6 +17,6 @@ namespace TilausDB2.Models
         public string Maa { get; set; }
         public string Kaupunki { get; set; }
         public Nullable<double> Henkilomaara { get; set; }
-        public string RiviID { get; set; }
+        public int RiviID { get; set; }
     }
 }

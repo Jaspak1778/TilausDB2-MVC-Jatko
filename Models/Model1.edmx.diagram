@@ -4,23 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e3313d23d1ba4b26828823a89c0c4d17" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="8f1a7fe18fad453790203cc457511af4" Name="Diagram1">
         <EntityTypeShape EntityType="TilauksetModel.Asiakkaat" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TilauksetModel.Henkilot" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TilauksetModel.Logins" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilauksetModel.Logins" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilauksetModel.Myynnit" Width="1.5" PointX="10" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TilauksetModel.Postitoimipaikat" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilauksetModel.Sivustolla_vierailijat" Width="1.5" PointX="7.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilauksetModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TilauksetModel.Tilaukset" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="TilauksetModel.Tilausrivit" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TilauksetModel.Tuotteet" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TilauksetModel.Vierailija_kohde" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="TilauksetModel.FK_Asiakkaat_Postitoimipaikat" ManuallyRouted="false" />
         <AssociationConnector Association="TilauksetModel.FK_Tilaukset_Asiakkaat" ManuallyRouted="false" />
+        <AssociationConnector Association="TilauksetModel.FK_Myynnit_Sivustolla_vierailijat" ManuallyRouted="false" />
         <AssociationConnector Association="TilauksetModel.FK_Tilaukset_Postitoimipaikat" ManuallyRouted="false" />
         <AssociationConnector Association="TilauksetModel.FK_Tilausrivit_Tilaukset" ManuallyRouted="false" />
         <AssociationConnector Association="TilauksetModel.FK_Tilausrivit_Tuotteet" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="TilauksetModel.Myynnit" Width="1.5" PointX="9.625" PointY="7.875" />
-        <EntityTypeShape EntityType="TilauksetModel.Sivustolla_vierailijat" Width="1.5" PointX="7.375" PointY="7.875" />
-        <AssociationConnector Association="TilauksetModel.FK_Myynnit_Sivustolla_vierailijat" />
-        <EntityTypeShape EntityType="TilauksetModel.Vierailija_kohde" Width="1.5" PointX="0.75" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
