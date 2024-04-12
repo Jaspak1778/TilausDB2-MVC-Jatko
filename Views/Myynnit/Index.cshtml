@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TilausDB2.Models.Myynnit>
+
+@{
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Myynnit</title>
+</head>
+<body>
+    <p>
+        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Luo" href="/Myynnit/Create"><img src="~/Icons/plus.svg" width="24" height="24" aria-label="Luo" />    Myyntitilastoja</a>
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Kokonaismyynti)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sivustolla_vierailijat.Vuosi)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kokonaismyynti)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sivustolla_vierailijat.Vuosi)
+            </td>
+            <td>
+      
+                <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Myynnit/Edit?id=@item.Vuosi"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+                <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Lisätiedot" href="/Myynnit/Details?id=@item.Vuosi"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+                <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Myynnit/Delete?id=@item.Vuosi"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

@@ -5,61 +5,61 @@
 
 <div class="row">
     <div class="col-8">
-    <h3>Tilaukset</h3>
+        <h3>Tilaukset</h3>
     </div>
     <div class="col-2">
-    <a class="btn btn-primary btm-sm" href="/Tilauksetdb/Create">Lisää tilaus</a>
+        <a class="btn btn-primary btm-sm" href="/Tilauksetdb/Create">Lisää tilaus</a>
     </div>
-   
+
 </div>
 
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tilausnumero</th>
+            <th>Tilauspvm</th>
+            <th>Tilauksen hinta</th>
+            <th>Tilauksen hallinta</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>Tilausnumero</th>
-                <th>Tilauspvm</th>
-                <th>Tilauksen hinta</th>
-                <th>Tilauksen hallinta</th>
-                <th></th>
+                <td>@Html.DisplayFor(modelItem => item.TilausID)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tilauspvm)</td>
+                <td>
+                    @{
+                        var yht = item.Tilausrivit.Sum(t => t.Maara * t.Ahinta);
+                    }
+                    @Html.DisplayFor(modelItem => yht)
+                </td>
+
+                <td>
+                    <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Lisää tuotteita" href="/Tilausrivit/Create?id=@item.TilausID"><img src="~/Icons/plus-square-fill.svg" width="12" height="12" /></a>
+                    <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Erittely" href="/Tilaukset/Details?id=@item.TilausID"><img src="~/Icons/list-ol.svg" width="12" height="12" /></a>
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Tilaukset/Edit?id=@item.TilausID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Tilaukset/Delete?id=@item.TilausID"><img src="~/Icons/x.svg" width="12" height="12" /></a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.TilausID)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Tilauspvm)</td>
-                    <td>
-                        @{
-                            var yht = item.Tilausrivit.Sum(t => t.Maara * t.Ahinta);
-                        }
-                        @Html.DisplayFor(modelItem => yht)
-                    </td>
+        }
+    </tbody>
+</table>
 
-                    <td>
-                        <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Lisää tuotteita" href="/Tilausrivit/Create?id=@item.TilausID"><img src="~/Icons/plus-square-fill.svg" width="12" height="12" /></a>
-                        <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Erittely" href="/Tilaukset/Details?id=@item.TilausID"><img src="~/Icons/list-ol.svg" width="12" height="12" /></a>
-                        <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Tilaukset/Edit?id=@item.TilausID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
-                        <a class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Tilaukset/Delete?id=@item.TilausID"><img src="~/Icons/x.svg" width="12" height="12" /></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        <script>
-            const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
-            const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-                v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-            )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
-            document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
-                const table = th.closest('table');
-                const tbody = table.querySelector('tbody');
-                Array.from(tbody.querySelectorAll('tr'))
-                    .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-                    .forEach(tr => tbody.appendChild(tr));
-            })));
-        </script>
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+        const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+            v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+        )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+        document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+            const table = th.closest('table');
+            const tbody = table.querySelector('tbody');
+            Array.from(tbody.querySelectorAll('tr'))
+                .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+                .forEach(tr => tbody.appendChild(tr));
+        })));
+    </script>
+}

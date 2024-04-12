@@ -1,45 +1,37 @@
 ﻿@model IEnumerable<TilausDB2.Models.Logins>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Käyttäjät";
+    int nro = 0;
 }
+<body>
+    <p></p>
+    <a class="btn btn-primary btm-sm" href="/Logins/Create">Lisää käyttäjä</a>
+    <p></p>
+    <table class="table">
+        <tr>
+            <th>Rivi nro:</th>
 
-<h2>Index</h2>
+            <th>@Html.DisplayNameFor(model => model.UserName)</th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PassWord)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.admin)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            if (item.UserName == Session["UserName"].ToString()) //suodattaa nykyisen käyttäjän pois luettelosta.
+            {
+                continue;
+            }
+            <tr>
+                <td>@{ nro += 1;} @nro</td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PassWord)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.admin)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LoginId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LoginId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LoginId })
-        </td>
-    </tr>
-}
+                <td>@Html.DisplayFor(modelItem => item.UserName)</td>
 
-</table>
+                <td>
+                    <a class="btn btn-primary btm-sm" href="/Logins/Edit?id=@item.LoginId">Muokkaa</a>
+                    <a class="btn btn-info btm-sm" href="/Logins/Details?id=@item.LoginId">Lisätiedot</a>
+                    <a class="btn btn-danger btm-sm" href="/Logins/Delete?id=@item.LoginId">Poista</a>
+                </td>
+            </tr>
+        }
+    </table>
+</body>

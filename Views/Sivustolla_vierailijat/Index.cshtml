@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TilausDB2.Models.Sivustolla_vierailijat>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vierailijat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Myynnit.Vuosi)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vierailijat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Myynnit.Vuosi)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Vuosi }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Vuosi }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Vuosi })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

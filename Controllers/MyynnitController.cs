@@ -10,107 +10,112 @@ using TilausDB2.Models;
 
 namespace TilausDB2.Controllers
 {
-    public class Vierailija_kohdeController : Controller
+    public class MyynnitController : Controller
     {
         private TilauksetEntity db = new TilauksetEntity();
 
-        // GET: Vierailija_kohde
+        // GET: Myynnit
         public ActionResult Index()
         {
-            return View(db.Vierailija_kohde.ToList());
+            var myynnit = db.Myynnit.Include(m => m.Sivustolla_vierailijat);
+            return View(myynnit.ToList());
         }
 
-        // GET: Vierailija_kohde/Details/5
+        // GET: Myynnit/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vierailija_kohde vierailija_kohde = db.Vierailija_kohde.Find(id);
-            if (vierailija_kohde == null)
+            Myynnit myynnit = db.Myynnit.Find(id);
+            if (myynnit == null)
             {
                 return HttpNotFound();
             }
-            return View(vierailija_kohde);
+            return View(myynnit);
         }
 
-        // GET: Vierailija_kohde/Create
+        // GET: Myynnit/Create
         public ActionResult Create()
         {
+            ViewBag.Vuosi = new SelectList(db.Sivustolla_vierailijat, "Vuosi", "Vuosi");
             return View();
         }
 
-        // POST: Vierailija_kohde/Create
+        // POST: Myynnit/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Maa,Kaupunki,Henkilomaara,RiviID")] Vierailija_kohde vierailija_kohde)
+        public ActionResult Create([Bind(Include = "Vuosi,Kokonaismyynti")] Myynnit myynnit)
         {
             if (ModelState.IsValid)
             {
-                db.Vierailija_kohde.Add(vierailija_kohde);
+                db.Myynnit.Add(myynnit);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(vierailija_kohde);
+            ViewBag.Vuosi = new SelectList(db.Sivustolla_vierailijat, "Vuosi", "Vuosi", myynnit.Vuosi);
+            return View(myynnit);
         }
 
-        // GET: Vierailija_kohde/Edit/5
+        // GET: Myynnit/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vierailija_kohde vierailija_kohde = db.Vierailija_kohde.Find(id);
-            if (vierailija_kohde == null)
+            Myynnit myynnit = db.Myynnit.Find(id);
+            if (myynnit == null)
             {
                 return HttpNotFound();
             }
-            return View(vierailija_kohde);
+            ViewBag.Vuosi = new SelectList(db.Sivustolla_vierailijat, "Vuosi", "Vuosi", myynnit.Vuosi);
+            return View(myynnit);
         }
 
-        // POST: Vierailija_kohde/Edit/5
+        // POST: Myynnit/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Maa,Kaupunki,Henkilomaara,RiviID")] Vierailija_kohde vierailija_kohde)
+        public ActionResult Edit([Bind(Include = "Vuosi,Kokonaismyynti")] Myynnit myynnit)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vierailija_kohde).State = EntityState.Modified;
+                db.Entry(myynnit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(vierailija_kohde);
+            ViewBag.Vuosi = new SelectList(db.Sivustolla_vierailijat, "Vuosi", "Vuosi", myynnit.Vuosi);
+            return View(myynnit);
         }
 
-        // GET: Vierailija_kohde/Delete/5
+        // GET: Myynnit/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Vierailija_kohde vierailija_kohde = db.Vierailija_kohde.Find(id);
-            if (vierailija_kohde == null)
+            Myynnit myynnit = db.Myynnit.Find(id);
+            if (myynnit == null)
             {
                 return HttpNotFound();
             }
-            return View(vierailija_kohde);
+            return View(myynnit);
         }
 
-        // POST: Vierailija_kohde/Delete/5
+        // POST: Myynnit/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Vierailija_kohde vierailija_kohde = db.Vierailija_kohde.Find(id);
-            db.Vierailija_kohde.Remove(vierailija_kohde);
+            Myynnit myynnit = db.Myynnit.Find(id);
+            db.Myynnit.Remove(myynnit);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

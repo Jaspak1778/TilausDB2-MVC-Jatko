@@ -130,6 +130,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
+    <Compile Include="Controllers\MyynnitController.cs" />
     <Compile Include="Controllers\PostitoimipaikatController.cs" />
     <Compile Include="Controllers\Sivustolla_vierailijatController.cs" />
     <Compile Include="Controllers\TilauksetController.cs" />
@@ -2336,6 +2337,23 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="Views\Home\Endsession.cshtml" />
+    <Content Include="Views\Logins\Kielletty.cshtml" />
+    <Content Include="Views\Myynnit\Create.cshtml" />
+    <Content Include="Views\Myynnit\Delete.cshtml" />
+    <Content Include="Views\Myynnit\Details.cshtml" />
+    <Content Include="Views\Myynnit\Edit.cshtml" />
+    <Content Include="Views\Myynnit\Index.cshtml" />
+    <Content Include="Views\Sivustolla_vierailijat\Create.cshtml" />
+    <Content Include="Views\Sivustolla_vierailijat\Delete.cshtml" />
+    <Content Include="Views\Sivustolla_vierailijat\Details.cshtml" />
+    <Content Include="Views\Sivustolla_vierailijat\Edit.cshtml" />
+    <Content Include="Views\Sivustolla_vierailijat\Index.cshtml" />
+    <Content Include="Views\Vierailija_kohde\Create.cshtml" />
+    <Content Include="Views\Vierailija_kohde\Delete.cshtml" />
+    <Content Include="Views\Vierailija_kohde\Details.cshtml" />
+    <Content Include="Views\Vierailija_kohde\Edit.cshtml" />
+    <Content Include="Views\Vierailija_kohde\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2378,7 +2396,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

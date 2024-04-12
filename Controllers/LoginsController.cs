@@ -115,6 +115,11 @@ namespace TilausDB2.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Kielletty()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

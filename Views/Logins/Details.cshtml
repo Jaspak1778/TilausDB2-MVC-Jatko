@@ -1,42 +1,44 @@
 ﻿@model TilausDB2.Models.Logins
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Lisätiedot";
+    string hallinta = "";
 }
+<body>
+    <div>
+        <h4>Käyttäjät: Lisätiedot</h4>
+        <hr />
+        <div>
+            <h5>Käyttäjä ID : @Model.LoginId</h5>
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                Käyttäjätunnus
+            </dt>
 
-<h2>Details</h2>
+            <dd>@Html.DisplayFor(model => model.UserName)</dd>
 
-<div>
-    <h4>Logins</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+            <dt>Salasana</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+            <dd>@Html.DisplayFor(model => model.PassWord)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PassWord)
-        </dt>
+            <dt>Käyttäjien hallinta oikeus</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PassWord)
-        </dd>
+            <dd>
+                @{if (Model.admin == 1)
+                    {
+                        hallinta = "Kyllä";
+                    }
+                    else
+                    {
+                        hallinta = "Ei";
+                    }
+                    @hallinta
 
-        <dt>
-            @Html.DisplayNameFor(model => model.admin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.admin)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.LoginId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                }
+            </dd>
+        </dl>
+    </div>
+    <p></p>
+    <a class="btn btn-primary btm-sm" href="javascript:void(0);" onclick="history.go(-1);">Takaisin</a>
+</body>

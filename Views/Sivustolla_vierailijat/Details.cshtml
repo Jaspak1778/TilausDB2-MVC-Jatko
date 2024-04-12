@@ -1,0 +1,42 @@
+﻿@model TilausDB2.Models.Sivustolla_vierailijat
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Sivustolla_vierailijat</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Vierailijat)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Vierailijat)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Myynnit.Vuosi)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Myynnit.Vuosi)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Vuosi }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
