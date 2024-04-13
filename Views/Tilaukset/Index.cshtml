@@ -29,6 +29,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.TilausID)</td>
                 <td>@Html.DisplayFor(modelItem => item.Tilauspvm)</td>
+                <td>@Html.DisplayFor(modelItem => item.Asiakkaat.Nimi)</td>
                 <td>
                     @{
                         var yht = item.Tilausrivit.Sum(t => t.Maara * t.Ahinta);
@@ -37,6 +38,7 @@
                 </td>
 
                 <td>
+                        
                     <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Lisää tuotteita" href="/Tilausrivit/Create?id=@item.TilausID"><img src="~/Icons/plus-square-fill.svg" width="12" height="12" /></a>
                     <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Erittely" href="/Tilaukset/Details?id=@item.TilausID"><img src="~/Icons/list-ol.svg" width="12" height="12" /></a>
                     <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Tilaukset/Edit?id=@item.TilausID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
