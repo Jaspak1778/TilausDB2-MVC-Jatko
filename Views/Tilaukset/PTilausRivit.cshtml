@@ -23,7 +23,10 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.TilausID)</td>
                 <td>@Html.DisplayFor(modelItem => item.TuoteID)</td>
-                <td>@Html.DisplayFor(modelItem => item.Ahinta)</td>
+                @{
+                    string price = @item.Ahinta.ToString("0.00");
+                }
+                <td>@price</td>
                 <td>@Html.DisplayFor(modelItem => item.Maara)</td>
                 <td>@Html.DisplayFor(modelItem => item.Nimi)</td>
                 <td>@Html.DisplayFor(modelItem => item.Kuva)</td>

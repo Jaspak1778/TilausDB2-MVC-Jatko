@@ -67,8 +67,10 @@ namespace TilausDB2.Controllers
         }
 
         // GET: Tilaukset/Create
-        public ActionResult Create()
+        public ActionResult Create(string returnUrl)
         {
+
+            ViewBag.ReturnUrl = returnUrl;
             /*ViewBag.AsiakasID = new SelectList(db.Asiakkaat, "Osoite", "Nimi");*/
             ViewBag.AsiakasID = new SelectList(db.Asiakkaat, "AsiakasID", "Nimi");
             ViewBag.Toimitusosoite = new SelectList(db.Asiakkaat, "Osoite", "Osoite");
@@ -82,13 +84,13 @@ namespace TilausDB2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TilausID,AsiakasID,Toimitusosoite,Postinumero,Tilauspvm,Toimituspvm")] Tilaukset tilaukset)
+        public ActionResult Create([Bind(Include = "TilausID,AsiakasID,Toimitusosoite,Postinumero,Tilauspvm,Toimituspvm")] Tilaukset tilaukset, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 db.Tilaukset.Add(tilaukset);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(returnUrl);
             }
 
             ViewBag.AsiakasID = new SelectList(db.Asiakkaat, "AsiakasID", "Nimi", tilaukset.AsiakasID);
