@@ -1,16 +1,16 @@
 ﻿@model TilausDB2.Models.Tuotteet
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Muokkaa";
 }
 
-<h2>Edit</h2>
+<h2>Muokkaa</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Tuotteet</h4>
         <hr />
@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ahinta, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ahinta, new { htmlAttributes = new { @class = "form-control" , type = "decimal", step = "0.01" } })
+                @Html.EditorFor(model => model.Ahinta, new { htmlAttributes = new { @class = "form-control", type = "decimal", step = "0.01" } })
                 @Html.ValidationMessageFor(model => model.Ahinta, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,18 +56,20 @@
                 @Html.ValidationMessageFor(model => model.Lisätieto_2, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-auto">
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Takaisin" href="javascript:void(0);" onclick="history.go(-1);"><img src="~/Icons/arrow-left-circle.svg" width="24" height="24" /></a>
+                </div>
+                <div class="col-auto">
+                    <input class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Talenna" type="image" src="~/Icons/save.svg" />
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

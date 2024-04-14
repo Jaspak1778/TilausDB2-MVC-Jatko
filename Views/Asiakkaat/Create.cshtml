@@ -1,16 +1,16 @@
 ﻿@model TilausDB2.Models.Asiakkaat
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Luo";
 }
 
-<h2>Create</h2>
+<h2>Luo</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Asiakkaat</h4>
         <hr />
@@ -55,17 +55,19 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-auto">
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Takaisin" href="javascript:void(0);" onclick="history.go(-1);"><img src="~/Icons/arrow-left-circle.svg" width="24" height="24" /></a>
+                </div>
+                <div class="col-auto">
+                    <input class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Talenna" type="image" src="~/Icons/save.svg" />
+                </div>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

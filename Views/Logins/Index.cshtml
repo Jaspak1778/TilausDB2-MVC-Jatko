@@ -25,12 +25,15 @@
                 <td>@{ nro += 1;} @nro</td>
 
                 <td>@Html.DisplayFor(modelItem => item.UserName)</td>
-
                 <td>
-                    <a class="btn btn-primary btm-sm" href="/Logins/Edit?id=@item.LoginId">Muokkaa</a>
-                    <a class="btn btn-info btm-sm" href="/Logins/Details?id=@item.LoginId">Lisätiedot</a>
-                    <a class="btn btn-danger btm-sm" href="/Logins/Delete?id=@item.LoginId">Poista</a>
+
+                    <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Logins/Edit?id=@item.LoginId"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Lisätiedot" href="/Logins/Details?id=@item.LoginId"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+
+                    <a class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Logins/Delete?id=@item.LoginId"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
                 </td>
+
             </tr>
         }
     </table>

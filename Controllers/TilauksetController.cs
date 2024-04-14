@@ -68,8 +68,11 @@ namespace TilausDB2.Controllers
         // GET: Tilaukset/Create
         public ActionResult Create()
         {
+            /*ViewBag.AsiakasID = new SelectList(db.Asiakkaat, "Osoite", "Nimi");*/
             ViewBag.AsiakasID = new SelectList(db.Asiakkaat, "AsiakasID", "Nimi");
+            ViewBag.Toimitusosoite = new SelectList(db.Asiakkaat, "Osoite", "Osoite");
             ViewBag.Postinumero = new SelectList(db.Postitoimipaikat, "Postinumero", "Postitoimipaikka");
+            
             return View();
         }
 

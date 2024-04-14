@@ -1,0 +1,31 @@
+﻿﻿@model IEnumerable<TilausDB2.Models.Tuotteet>
+
+@{
+    ViewBag.Title = "Showcase";
+}
+
+<h3>Tuotteiden esittely näkymä</h3>
+<hr />
+<div>
+    <a class="btn btn-primary btm-sm" href="javascript:void(0);" onclick="history.go(-1);">Takaisin</a>
+    <p></p>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-lg-3">
+            <div class="card bg-light">
+                <h3 class="card-header">@item.Nimi</h3>
+                <div class="card-body">
+                    <h5 class="card-title">@item.Ahinta</h5>
+                    <img style="height: 200px; width: 200px; display: block;" src="@item.Kuva" /><img />
+                </div>
+            </div>
+
+        </div>
+
+    }
+
+</div>

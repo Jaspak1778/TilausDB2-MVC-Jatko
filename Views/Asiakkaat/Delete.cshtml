@@ -1,12 +1,10 @@
 ﻿@model TilausDB2.Models.Asiakkaat
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Poista";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Varmista poisto</h3>
 <div>
     <h4>Asiakkaat</h4>
     <hr />
@@ -53,12 +51,18 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-auto">
+                <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Takaisin" href="javascript:void(0);" onclick="history.go(-1);"><img src="~/Icons/arrow-left-circle.svg" width="24" height="24" /></a>
+            </div>
+            <div class="col-auto">
+                <input class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Talenna" type="image" src="~/Icons/x.svg" />
+            </div>
         </div>
-    }
+    </div>
 </div>
+
+

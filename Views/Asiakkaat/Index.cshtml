@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<TilausDB2.Models.Asiakkaat>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Asiakas lista";
 }
 
-<h2>Index</h2>
+<h2>Asiakkaat</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Lisää tuote" href="/Asiakkaat/Create"><img src="~/Icons/plus.svg" width="24" height="24" aria-label="Luo" />    Asiakas</a>
 </p>
 <table class="table">
     <tr>
@@ -47,9 +47,12 @@
             @Html.DisplayFor(modelItem => item.Postitoimipaikat.Postitoimipaikka)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AsiakasID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AsiakasID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AsiakasID })
+            
+            <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Asiakkaat/Edit?id=@item.AsiakasID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+            
+            <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Lisätiedot" href="/Asiakkaat/Details?id=@item.AsiakasID"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+            
+            <a class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Asiakkaat/Delete?id=@item.AsiakasID"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
         </td>
     </tr>
 }

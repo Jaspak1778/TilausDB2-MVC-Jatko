@@ -2354,6 +2354,7 @@
     <Content Include="Views\Vierailija_kohde\Details.cshtml" />
     <Content Include="Views\Vierailija_kohde\Edit.cshtml" />
     <Content Include="Views\Vierailija_kohde\Index.cshtml" />
+    <Content Include="Views\Tuotteet\CardIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
