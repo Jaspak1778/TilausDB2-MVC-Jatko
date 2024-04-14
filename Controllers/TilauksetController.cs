@@ -18,6 +18,7 @@ namespace TilausDB2.Controllers
         // GET: Tilaukset
         public ActionResult Index()
         {
+            ViewBag.Title = "Tilaukset";
             var tilaukset = db.Tilaukset.Include(t => t.Asiakkaat).Include(t => t.Postitoimipaikat);
             return View(tilaukset.ToList());
         }

@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<TilausDB2.Models.Tilaukset>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tilausten hallinta";
 }
 
 <div class="row">
     <div class="col-8">
         <h3>Tilaukset</h3>
     </div>
-    <div class="col-2">
-        <a class="btn btn-primary btm-sm" href="/Tilaukset/Create">Lisää tilaus</a>
+    <div class="col-auto">
+        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Lisää tuote" href="/Tilaukset/Create"><img src="~/Icons/plus.svg" width="24" height="24" aria-label="Luo" />    Tilaus</a>
     </div>
+    <div class="col-auto">
+        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Lisää tuote" href="/Tilaukset/TilausOtsikot"><img src="~/Icons/list.svg" width="24" height="24" aria-label="Luo" />TilausOtsikot</a>
+    </div>
+    <div class="col-auto">
+        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Lisää tuote" href="/Tilaukset/Ordersummary"><img src="~/Icons/list.svg" width="24" height="24" aria-label="Luo" />OrderSummary</a>
+    </div>
+
 
 </div>
 
