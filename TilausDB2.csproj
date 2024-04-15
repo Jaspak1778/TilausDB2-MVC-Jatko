@@ -141,52 +141,49 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Asiakkaat.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Henkilot.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Logins.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Myynnit.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Postitoimipaikat.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sivustolla_vierailijat.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tilaukset.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TilausDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TilausDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TilausDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TilausDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TilausDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TilausDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Tilausrivit.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tuotteet.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vierailija_kohde.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>TilausDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="﻿ViewModels\OrderRows.cs" />
@@ -2294,15 +2291,15 @@
     <Content Include="Icons\youtube.svg" />
     <Content Include="Icons\zoom-in.svg" />
     <Content Include="Icons\zoom-out.svg" />
-    <Content Include="Models\Model1.Context.tt">
+    <Content Include="Models\TilausDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>TilausDB.edmx</DependentUpon>
+      <LastGenOutput>TilausDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.tt">
+    <Content Include="Models\TilausDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>TilausDB.edmx</DependentUpon>
+      <LastGenOutput>TilausDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -2312,16 +2309,17 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\chart.js" />
     <Content Include="Scripts\chart.min.js" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\gijgo\fonts\gijgo-material.woff" />
     <Content Include="Content\gijgo\fonts\gijgo-material.ttf" />
     <Content Include="Content\gijgo\fonts\gijgo-material.eot" />
+    <EntityDeploy Include="Models\TilausDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TilausDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TilausDB.edmx.diagram">
+      <DependentUpon>TilausDB.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\TilausDB220240415112601 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\gijgo\combined\gijgo.js" />
     <Content Include="Scripts\gijgo\combined\gijgo.min.js" />

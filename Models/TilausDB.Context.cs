@@ -25,16 +25,15 @@ namespace TilausDB2.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Asiakkaat> Asiakkaat { get; set; }
         public virtual DbSet<Henkilot> Henkilot { get; set; }
         public virtual DbSet<Logins> Logins { get; set; }
         public virtual DbSet<Myynnit> Myynnit { get; set; }
         public virtual DbSet<Postitoimipaikat> Postitoimipaikat { get; set; }
         public virtual DbSet<Sivustolla_vierailijat> Sivustolla_vierailijat { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tilaukset> Tilaukset { get; set; }
         public virtual DbSet<Tilausrivit> Tilausrivit { get; set; }
         public virtual DbSet<Tuotteet> Tuotteet { get; set; }
         public virtual DbSet<Vierailija_kohde> Vierailija_kohde { get; set; }
+        public virtual DbSet<Asiakkaat> Asiakkaat { get; set; }
     }
 }

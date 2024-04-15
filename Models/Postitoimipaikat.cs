@@ -17,16 +17,16 @@ namespace TilausDB2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Postitoimipaikat()
         {
-            this.Asiakkaat = new HashSet<Asiakkaat>();
             this.Tilaukset = new HashSet<Tilaukset>();
+            this.Asiakkaat = new HashSet<Asiakkaat>();
         }
     
         public string Postinumero { get; set; }
         public string Postitoimipaikka { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Asiakkaat> Asiakkaat { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tilaukset> Tilaukset { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Asiakkaat> Asiakkaat { get; set; }
     }
 }
