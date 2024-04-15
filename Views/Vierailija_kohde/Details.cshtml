@@ -1,7 +1,7 @@
 ﻿@model TilausDB2.Models.Vierailija_kohde
 
 @{
-    Layout = null;
+    
 }
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
+    <title>Lisätiedot</title>
 </head>
 <body>
     <div>
@@ -43,8 +43,7 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.RiviID }) |
-        @Html.ActionLink("Back to List", "Index")
+        <div class="row-cols-6"><a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Takaisin" href="javascript:void(0);" onclick="history.go(-1);"><img src="~/Icons/arrow-left-circle.svg" width="24" height="24" /></a></div>
     </p>
 </body>
 </html>

@@ -12,12 +12,23 @@
     <title>Myynnit</title>
 </head>
 <body>
-    <p>
-        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Luo" href="/Myynnit/Create"><img src="~/Icons/plus.svg" width="24" height="24" aria-label="Luo" />    Myyntitilastoja</a>
-    </p>
-    <p>
-        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Luo" href="/Sivustolla_vierailijat/Index"><img src="~/Icons/arrow-right-circle.svg" width="24" height="24" aria-label="Luo" />Sivustolla vierailijat</a>
-    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h4>Myynnit</h4>
+            </div>
+            <div class="col-auto">
+                <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Luo" href="/Myynnit/Create"><img src="~/Icons/plus.svg" width="24" height="24" aria-label="Luo" />    Myyntitilastoja</a>
+            </div>
+            <div class="col-auto">
+                <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Luo" href="/Sivustolla_vierailijat/Index"><img src="~/Icons/arrow-right-circle.svg" width="24" height="24" aria-label="Luo" />Sivustolla vierailijat</a>
+            </div>
+            <div class="col-auto">
+                <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Luo" href="/Vierailija_kohde/Index"><img src="~/Icons/arrow-right-circle.svg" width="24" height="24" aria-label="Luo" />Vierailijat kohteittain</a>
+            </div>
+        </div>
+    </div>
+    <br />
     <table class="table">
         <tr>
             <th>
@@ -48,5 +59,6 @@
         }
 
     </table>
+    <div class="row-cols-6"><a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Takaisin" href="javascript:void(0);" onclick="history.go(-1);"><img src="~/Icons/arrow-left-circle.svg" width="24" height="24" /></a></div>
 </body>
 </html>

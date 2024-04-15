@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TilausDB2.Models.Sivustolla_vierailijat>
 
 @{
-    Layout = null;
+   
 }
 
 <!DOCTYPE html>
@@ -9,11 +9,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Sivustolla vierailijat</title>
 </head>
 <body>
     <p>
-        @Html.ActionLink("Create New", "Create")
+
+        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Lisää" href="/Sivustolla_vierailijat/Create"><img src="~/Icons/plus.svg" width="24" height="24" />   Luo tilastoja</a>
     </p>
     <table class="table">
         <tr>
@@ -25,23 +26,28 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vierailijat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Myynnit.Vuosi)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Vuosi }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Vuosi }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Vuosi })
-            </td>
-        </tr>
-    }
-    
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vierailijat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Myynnit.Vuosi)
+                </td>
+                <td>
+
+                    <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Sivustolla_vierailijat/Edit?id=@item.Vuosi"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Lisätiedot" href="/Sivustolla_vierailijat/Details?id=@item.Vuosi"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+
+                    <a class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Sivustolla_vierailijat/Delete?id=@item.Vuosi"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
+                </td>
+            </tr>
+        }
+
     </table>
+    <div class="row-cols-6"><a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Takaisin" href="javascript:void(0);" onclick="history.go(-1);"><img src="~/Icons/arrow-left-circle.svg" width="24" height="24" /></a></div>
 </body>
 </html>

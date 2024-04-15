@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TilausDB2.Models.Vierailija_kohde>
 
 @{
-    Layout = null;
+    
 }
 
 <!DOCTYPE html>
@@ -9,11 +9,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Vierailijat maa/kaupunki</title>
 </head>
 <body>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Lisää" href="/Vierailija_kohde/Create"><img src="~/Icons/plus.svg" width="24" height="24" />   Luo tilastoja</a>
     </p>
     <table class="table">
         <tr>
@@ -28,26 +28,32 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Maa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kaupunki)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Henkilomaara)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.RiviID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.RiviID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.RiviID })
-            </td>
-        </tr>
-    }
-    
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Maa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kaupunki)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Henkilomaara)
+                </td>
+                <td>
+
+                    <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Vierailija_kohde/Edit?id=@item.RiviID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+
+                    <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Lisätiedot" href="/Vierailija_kohde/Details?id=@item.RiviID"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+
+                    <a class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Vierailija_kohde/Delete?id=@item.RiviID"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
+                </td>
+
+            </tr>
+        }
+
     </table>
+    <div class="row-cols-6"><a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Takaisin" href="javascript:void(0);" onclick="history.go(-1);"><img src="~/Icons/arrow-left-circle.svg" width="24" height="24" /></a></div>
 </body>
 </html>

@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<TilausDB2.Models.Postitoimipaikat>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Postitoimipaikat";
 }
 
-<h2>Index</h2>
+    <h2>Sisällys</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    <p>
+        <a class="badge bg-primary" data-toggle="tooltip" data-placement="bottom" title="Lisää toimipaikka" href="/Postitoimipaikat/Create"><img src="~/Icons/plus.svg" width="24" height="24" aria-label="Luo" />    Postitoimipaikka</a>
+    </p>
 <table class="table">
     <tr>
         <th>
@@ -23,10 +23,14 @@
             @Html.DisplayFor(modelItem => item.Postitoimipaikka)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Postinumero }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Postinumero }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Postinumero })
+
+            <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Postitoimipaikat/Edit?id=@item.Postinumero"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+
+            <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Lisätiedot" href="/Postitoimipaikat/Details?id=@item.Postinumero"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+
+            <a class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Postitoimipaikat/Delete?id=@item.Postinumero"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
         </td>
+
     </tr>
 }
 
