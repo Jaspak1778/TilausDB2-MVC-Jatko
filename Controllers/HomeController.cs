@@ -11,7 +11,7 @@ using System.Drawing;
 
 namespace TilausDB2.Controllers
 {
-
+    
     public class HomeController : Controller
     {
         private TilauksetEntity db = new TilauksetEntity();
@@ -116,7 +116,15 @@ namespace TilausDB2.Controllers
         {
             Session.Abandon();
             ViewBag.LoggedStatus = "Out";
-            return RedirectToAction("Index", "Home"); //Uloskirjautumisen jälkeen pääsivulle
+            return RedirectToAction("Endsession", "Home");  //Uloskirjautumisen jälkeen pääsivulle
+        }
+
+        public ActionResult Endsession()
+        {
+
+            Session.Clear();
+            ViewBag.LoggedOut = "Olet kirjautunut ulos järjestelmästä.";
+            return View();
         }
     }
 

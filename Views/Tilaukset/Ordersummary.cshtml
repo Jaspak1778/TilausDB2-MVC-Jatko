@@ -42,11 +42,13 @@
             <td>@Html.DisplayFor(modelItem => item.Lisätieto_1)</td>
             <td>@Html.DisplayFor(modelItem => item.Lisätieto_2)</td>
             <td class="col"><a href="@item.Kuva" ; target="_blank"><img style="height: 130px; width: 130px; display: block;" src="@item.Kuva" /><img /></a></td>
-
             <td>
-                <a class="btn btn-outline-dark" href="/Orders/Edit?id=@item.TilausID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
-                <a class="btn btn-outline-dark" href="/Orders/Details?id=@item.TilausID"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
-                <a class="btn btn-outline-dark" href="/Orders/Delete?id=@item.TilausID"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
+
+                <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Tilaukset/Edit?id=@item.TuoteID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+
+                <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Lisätiedot" href="/Tilaukset/Details?id=@item.TuoteID"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+
+                <a class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Tilaukset/Delete?id=@item.TuoteID"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
             </td>
         </tr>
     }

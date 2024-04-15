@@ -36,7 +36,7 @@
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.TilausID)</td>
-                <td>@Html.DisplayFor(modelItem => item.Tilauspvm)</td>
+                <td>@Html.ValueFor(modelItem => item.Tilauspvm, "{0:d}")</td>
                 <td>@Html.DisplayFor(modelItem => item.Asiakkaat.Nimi)</td>
                 <td>
                     @{

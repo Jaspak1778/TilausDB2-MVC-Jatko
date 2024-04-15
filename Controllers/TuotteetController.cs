@@ -100,6 +100,12 @@ namespace TilausDB2.Controllers
             return View(tuotteet.ToPagedList(pageNumber, pageSize));
         }
 
+        public ActionResult CardIndex()
+        {
+            return View(db.Tuotteet.ToList());
+        }
+
+
         // GET: Tuotteet/Details/5
         public ActionResult Details(int? id)
         {

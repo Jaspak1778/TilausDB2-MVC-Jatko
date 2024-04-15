@@ -11,6 +11,7 @@ using TilausDB2.ViewModels;
 
 namespace TilausDB2.Controllers
 {
+    [CheckSession]
     public class TilauksetController : Controller
     {
         private readonly TilauksetEntity db = new TilauksetEntity();

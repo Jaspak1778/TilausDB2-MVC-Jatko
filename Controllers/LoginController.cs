@@ -19,7 +19,7 @@ namespace TilausDB2.Controllers
             base.OnActionExecuting(filterContext);
         }
     }
-    /*public class CheckAdminAttribute : ActionFilterAttribute
+    public class CheckAdminAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -31,7 +31,7 @@ namespace TilausDB2.Controllers
                 return;
             }
 
-            using TilauksetEntity db = new TilauksetEntity())
+            using (TilauksetEntity db = new TilauksetEntity())
             {
                 var user = db.Logins.SingleOrDefault(x => x.UserName == userName);
 
@@ -45,7 +45,7 @@ namespace TilausDB2.Controllers
 
             base.OnActionExecuting(filterContext);
         }
-    }*/
+    }
 
 
     public class LoginController : Controller

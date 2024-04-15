@@ -4,6 +4,32 @@
     ViewBag.Title = "Uusi tilaus";
 }
 
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> 
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Function to calculate Toimituspvm based on Tilauspvm
+            $("#Tilauspvm").change(function () {
+                var tilauspvm = new Date($(this).val());
+                if (!isNaN(tilauspvm.getTime())) {
+                    var toimituspvm = new Date(tilauspvm);
+                    toimituspvm.setDate(tilauspvm.getDate() + 14);
+                    var formattedToimituspvm = toimituspvm.toLocaleDateString('en-GB');
+                    $("#Toimituspvm").val(formattedToimituspvm);
+                }
+            });
+
+            // Datepicker
+            $(".datefield").datepicker();
+        });
+    </script>
+}
+
+
+
 <h3>Tilaukset: Luo tilaus asiakkaalle</h3>
 
 @using (Html.BeginForm())
@@ -52,7 +78,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Tilauspvm, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Tilauspvm, new { htmlAttributes = new { @class = "form-control" } })
+
+                @Html.EditorFor(model => model.Tilauspvm, new { htmlAttributes = new { @class = "form-control", type="date" } })
                 @Html.ValidationMessageFor(model => model.Tilauspvm, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,22 +102,3 @@
     </div>
 }
 
-@section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-
-            $("#Tilauspvm").change(function () {
-                var tilauspvm = new Date($(this).val());
-                if (!isNaN(tilauspvm.getTime())) {
-                    var toimituspvm = new Date(tilauspvm);
-                    toimituspvm.setDate(tilauspvm.getDate() + 14);
-                    var formattedToimituspvm = toimituspvm.toLocaleDateString('en-GB');
-                    $("#Toimituspvm").val(formattedToimituspvm);
-                }
-            });
-        });
-    </script>
-}

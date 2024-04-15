@@ -10,6 +10,7 @@ using TilausDB2.Models;
 
 namespace TilausDB2.Controllers
 {
+    [CheckSession]
     public class MyynnitController : Controller
     {
         private TilauksetEntity db = new TilauksetEntity();

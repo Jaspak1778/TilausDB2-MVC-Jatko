@@ -43,11 +43,11 @@
                 @Html.DisplayFor(modelItem => yht)
             </td>
             <td>
-                <a class="btn btn-primary btm-sm" href="/Tilausrivit/Edit?id=@tilausrivi.TilausriviID">Muokkaa</a>
-                <a class="btn btn-danger btm-sm" href="/Tilausrivit/Delete?id=@tilausrivi.TilausriviID">Poista</a>
+                <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Muokkaa" href="/Tilausrivit/Edit?id=@tilausrivi.TilausriviID"><img src="~/Icons/pen.svg" width="20" height="20" /></a>
+                <a class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Tilausrivit/Delete?id=@tilausrivi.TilausriviID"><img src="~/Icons/x-circle.svg" width="20" height="20" /></a>
             </td>
         </tr>
     }
 </table>
 
-<div class="row-cols-6"><a class="btn btn-primary btm-sm" href="javascript:void(0);" onclick="history.go(-1);">Takaisin</a></div>
+<div class="row-cols-6"><a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Takaisin" href="javascript:void(0);" onclick="history.go(-1);"><img src="~/Icons/arrow-left-circle.svg" width="24" height="24" /></a></div>

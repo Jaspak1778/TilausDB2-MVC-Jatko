@@ -10,6 +10,7 @@ using TilausDB2.Models;
 
 namespace TilausDB2.Controllers
 {
+    [CheckSession]
     public class TilausrivitController : Controller
     {
         private TilauksetEntity db = new TilauksetEntity();
@@ -82,7 +83,7 @@ namespace TilausDB2.Controllers
                 return HttpNotFound();
             }
 
-            // For simplicity, let's just take the first element from the list
+           
             var tilausrivit = tilausrivitList.First();
 
             ViewBag.TilausID = new SelectList(db.Tilaukset, "TilausID", "Toimitusosoite", tilausrivit.TilausID);
@@ -102,7 +103,7 @@ namespace TilausDB2.Controllers
             {
                 db.Entry(tilausrivit).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Tilaukset");
             }
             ViewBag.TilausID = new SelectList(db.Tilaukset, "TilausID", "Toimitusosoite", tilausrivit.TilausID);
             ViewBag.TuoteID = new SelectList(db.Tuotteet, "TuoteID", "Nimi", tilausrivit.TuoteID);
@@ -132,7 +133,7 @@ namespace TilausDB2.Controllers
             Tilausrivit tilausrivit = db.Tilausrivit.Find(id);
             db.Tilausrivit.Remove(tilausrivit);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Tilaukset");
         }
 
         protected override void Dispose(bool disposing)

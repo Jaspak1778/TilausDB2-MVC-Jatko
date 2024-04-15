@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<TilausDB2.Models.Tilausrivit>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tilausrivit";
 }
 
-<h2>Index</h2>
+<h2>Tilausrivit</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Luo")
 </p>
 <table class="table">
     <tr>
@@ -40,10 +40,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Tuotteet.Nimi)
         </td>
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TilausriviID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TilausriviID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TilausriviID })
+
+            <a class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Editoi" href="/Tilausrivit/Edit?id=@item.TilausriviID"><img src="~/Icons/pen.svg" width="12" height="12" /></a>
+
+            <a class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Lisätiedot" href="/Tilausrivit/Details?id=@item.TilausriviID"><img src="~/Icons/three-dots.svg" width="12" height="12" /></a>
+
+            <a class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Poista" href="/Tilausrivit/Delete?id=@item.TilausriviID"><img src="~/Icons/x-circle.svg" width="12" height="12" /></a>
         </td>
     </tr>
 }
