@@ -24,7 +24,8 @@
     <thead>
         <tr>
             <th>Tilausnumero</th>
-            <th>Tilauspvm</th>
+            <th>@Html.DisplayNameFor(model => model.Tilauspvm)</th>
+            <th>@Html.DisplayNameFor(model => model.Toimituspvm)</th>
             <th>Asiakas</th>
             <th>Tilauksen hinta</th>
             <th>Tilauksen hallinta</th>
@@ -37,6 +38,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.TilausID)</td>
                 <td>@Html.ValueFor(modelItem => item.Tilauspvm, "{0:d}")</td>
+                <td>@Html.ValueFor(modelItem => item.Toimituspvm, "{0:d}")</td>
                 <td>@Html.DisplayFor(modelItem => item.Asiakkaat.Nimi)</td>
                 <td>
                     @{

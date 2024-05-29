@@ -12,7 +12,7 @@ namespace TilausDB2.Controllers
 {
     public class Vierailija_kohdeController : Controller
     {
-        private TilauksetEntity db = new TilauksetEntity();
+        private TilauksetEntities db = new TilauksetEntities();
 
         // GET: Vierailija_kohde
         public ActionResult Index()

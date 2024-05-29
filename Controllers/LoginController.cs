@@ -31,7 +31,7 @@ namespace TilausDB2.Controllers
                 return;
             }
 
-            using (TilauksetEntity db = new TilauksetEntity())
+            using (TilauksetEntities db = new TilauksetEntities())
             {
                 var user = db.Logins.SingleOrDefault(x => x.UserName == userName);
 
@@ -57,7 +57,7 @@ namespace TilausDB2.Controllers
         [HttpPost]
         public ActionResult Authorize(Logins LoginModel)
         {
-            TilauksetEntity db = new TilauksetEntity();
+            TilauksetEntities db = new TilauksetEntities();
             var LoggedUser = db.Logins.SingleOrDefault(x => x.UserName == LoginModel.UserName && x.PassWord == LoginModel.PassWord);
             if (LoggedUser != null)
             {

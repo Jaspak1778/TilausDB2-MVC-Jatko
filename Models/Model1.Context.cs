@@ -13,10 +13,10 @@ namespace TilausDB2.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TilauksetEntity : DbContext
+    public partial class TilauksetEntities : DbContext
     {
-        public TilauksetEntity()
-            : base("name=TilauksetEntity")
+        public TilauksetEntities()
+            : base("name=TilauksetEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace TilausDB2.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Asiakkaat> Asiakkaat { get; set; }
         public virtual DbSet<Henkilot> Henkilot { get; set; }
         public virtual DbSet<Logins> Logins { get; set; }
         public virtual DbSet<Myynnit> Myynnit { get; set; }
@@ -34,6 +35,5 @@ namespace TilausDB2.Models
         public virtual DbSet<Tilausrivit> Tilausrivit { get; set; }
         public virtual DbSet<Tuotteet> Tuotteet { get; set; }
         public virtual DbSet<Vierailija_kohde> Vierailija_kohde { get; set; }
-        public virtual DbSet<Asiakkaat> Asiakkaat { get; set; }
     }
 }

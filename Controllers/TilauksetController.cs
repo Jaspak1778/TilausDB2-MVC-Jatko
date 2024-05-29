@@ -14,7 +14,7 @@ namespace TilausDB2.Controllers
     [CheckSession]
     public class TilauksetController : Controller
     {
-        private readonly TilauksetEntity db = new TilauksetEntity();
+        private readonly TilauksetEntities db = new TilauksetEntities();
 
         // GET: Tilaukset
         public ActionResult Index()

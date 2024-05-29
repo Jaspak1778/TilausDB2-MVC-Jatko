@@ -17,7 +17,7 @@
                 if (!isNaN(tilauspvm.getTime())) {
                     var toimituspvm = new Date(tilauspvm);
                     toimituspvm.setDate(tilauspvm.getDate() + 14);
-                    var formattedToimituspvm = toimituspvm.toLocaleDateString('en-GB');
+                    var formattedToimituspvm = toimituspvm.toLocaleDateString('fi-FI');
                     $("#Toimituspvm").val(formattedToimituspvm);
                 }
             });

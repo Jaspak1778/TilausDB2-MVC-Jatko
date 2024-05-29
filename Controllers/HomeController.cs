@@ -14,7 +14,7 @@ namespace TilausDB2.Controllers
     
     public class HomeController : Controller
     {
-        private TilauksetEntity db = new TilauksetEntity();
+        private TilauksetEntities db = new TilauksetEntities();
 
         public ActionResult Index()
         {
@@ -92,7 +92,7 @@ namespace TilausDB2.Controllers
         [HttpPost]
         public ActionResult Authorize(Logins LoginModel)
         {
-            TilauksetEntity db = new TilauksetEntity();
+            TilauksetEntities db = new TilauksetEntities();
             //Haetaan käyttäjän/Loginin tiedot annetuilla tunnustiedoilla tietokannasta LINQ -kyselyllä
             var LoggedUser = db.Logins.SingleOrDefault(x => x.UserName == LoginModel.UserName && x.PassWord == LoginModel.PassWord);
             if (LoggedUser != null)

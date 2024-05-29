@@ -12,7 +12,7 @@ namespace TilausDB2.Controllers
 {
     public class LoginsController : Controller
     {
-        private TilauksetEntity db = new TilauksetEntity();
+        private TilauksetEntities db = new TilauksetEntities();
         [CheckSession]
         [CheckAdmin]
         public ActionResult Index()

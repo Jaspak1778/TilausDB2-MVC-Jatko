@@ -13,7 +13,7 @@ namespace TilausDB2.Controllers
     [CheckSession]
     public class MyynnitController : Controller
     {
-        private TilauksetEntity db = new TilauksetEntity();
+        private TilauksetEntities db = new TilauksetEntities();
 
         // GET: Myynnit
         public ActionResult Index()

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TilauksetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TilauksetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asiakkaat">
           <Key>
             <PropertyRef Name="AsiakasID" />
@@ -207,10 +207,24 @@
             <End Role="Tilausrivit" EntitySet="Tilausrivit" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TilauksetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asiakkaat">
+          <Key>
+            <PropertyRef Name="AsiakasID" />
+          </Key>
+          <Property Name="AsiakasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Osoite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="Puhelinumero" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Sähköposti" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Postitoimipaikat" Relationship="Self.FK_Asiakkaat_Postitoimipaikat" FromRole="Asiakkaat" ToRole="Postitoimipaikat" />
+          <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Asiakkaat" FromRole="Asiakkaat" ToRole="Tilaukset" />
+        </EntityType>
         <EntityType Name="Henkilot">
           <Key>
             <PropertyRef Name="Henkilo_id" />
@@ -246,8 +260,8 @@
           </Key>
           <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Postitoimipaikka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Asiakkaat" Relationship="Self.FK_Asiakkaat_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Asiakkaat" />
           <NavigationProperty Name="Tilaukset" Relationship="Self.FK_Tilaukset_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Tilaukset" />
-          <NavigationProperty Name="Asiakkaat" Relationship="TilauksetModel.FK_Asiakkaat_Postitoimipaikat" FromRole="Postitoimipaikat" ToRole="Asiakkaat" />
         </EntityType>
         <EntityType Name="Sivustolla_vierailijat">
           <Key>
@@ -267,9 +281,9 @@
           <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="Tilauspvm" Type="DateTime" Precision="3" />
           <Property Name="Toimituspvm" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Asiakkaat" Relationship="Self.FK_Tilaukset_Asiakkaat" FromRole="Tilaukset" ToRole="Asiakkaat" />
           <NavigationProperty Name="Postitoimipaikat" Relationship="Self.FK_Tilaukset_Postitoimipaikat" FromRole="Tilaukset" ToRole="Postitoimipaikat" />
           <NavigationProperty Name="Tilausrivit" Relationship="Self.FK_Tilausrivit_Tilaukset" FromRole="Tilaukset" ToRole="Tilausrivit" />
-          <NavigationProperty Name="Asiakkaat" Relationship="TilauksetModel.FK_Tilaukset_Asiakkaat" FromRole="Tilaukset" ToRole="Asiakkaat" />
         </EntityType>
         <EntityType Name="Tilausrivit">
           <Key>
@@ -304,6 +318,30 @@
           <Property Name="Henkilomaara" Type="Double" />
           <Property Name="RiviID" Type="Int32" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Asiakkaat_Postitoimipaikat">
+          <End Role="Postitoimipaikat" Type="Self.Postitoimipaikat" Multiplicity="0..1" />
+          <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postitoimipaikat">
+              <PropertyRef Name="Postinumero" />
+            </Principal>
+            <Dependent Role="Asiakkaat">
+              <PropertyRef Name="Postinumero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tilaukset_Asiakkaat">
+          <End Role="Asiakkaat" Type="Self.Asiakkaat" Multiplicity="0..1" />
+          <End Role="Tilaukset" Type="Self.Tilaukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asiakkaat">
+              <PropertyRef Name="AsiakasID" />
+            </Principal>
+            <Dependent Role="Tilaukset">
+              <PropertyRef Name="AsiakasID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Myynnit_Sivustolla_vierailijat">
           <End Role="Sivustolla_vierailijat" Type="Self.Sivustolla_vierailijat" Multiplicity="1" />
           <End Role="Myynnit" Type="Self.Myynnit" Multiplicity="0..1" />
@@ -352,7 +390,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TilauksetEntity" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TilauksetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asiakkaat" EntityType="Self.Asiakkaat" />
           <EntitySet Name="Henkilot" EntityType="Self.Henkilot" />
           <EntitySet Name="Logins" EntityType="Self.Logins" />
           <EntitySet Name="Myynnit" EntityType="Self.Myynnit" />
@@ -362,6 +401,14 @@
           <EntitySet Name="Tilausrivit" EntityType="Self.Tilausrivit" />
           <EntitySet Name="Tuotteet" EntityType="Self.Tuotteet" />
           <EntitySet Name="Vierailija_kohde" EntityType="Self.Vierailija_kohde" />
+          <AssociationSet Name="FK_Asiakkaat_Postitoimipaikat" Association="Self.FK_Asiakkaat_Postitoimipaikat">
+            <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
+            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tilaukset_Asiakkaat" Association="Self.FK_Tilaukset_Asiakkaat">
+            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
+            <End Role="Tilaukset" EntitySet="Tilaukset" />
+          </AssociationSet>
           <AssociationSet Name="FK_Myynnit_Sivustolla_vierailijat" Association="Self.FK_Myynnit_Sivustolla_vierailijat">
             <End Role="Sivustolla_vierailijat" EntitySet="Sivustolla_vierailijat" />
             <End Role="Myynnit" EntitySet="Myynnit" />
@@ -378,59 +425,25 @@
             <End Role="Tuotteet" EntitySet="Tuotteet" />
             <End Role="Tilausrivit" EntitySet="Tilausrivit" />
           </AssociationSet>
-          <EntitySet Name="Asiakkaat" EntityType="TilauksetModel.Asiakkaat" />
-          <AssociationSet Name="FK_Asiakkaat_Postitoimipaikat" Association="TilauksetModel.FK_Asiakkaat_Postitoimipaikat">
-            <End Role="Postitoimipaikat" EntitySet="Postitoimipaikat" />
-            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tilaukset_Asiakkaat" Association="TilauksetModel.FK_Tilaukset_Asiakkaat">
-            <End Role="Asiakkaat" EntitySet="Asiakkaat" />
-            <End Role="Tilaukset" EntitySet="Tilaukset" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Asiakkaat">
-          <Key>
-            <PropertyRef Name="AsiakasID" />
-          </Key>
-          <Property Name="AsiakasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Osoite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Postinumero" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="Puhelinumero" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Sähköposti" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Postitoimipaikat" Relationship="TilauksetModel.FK_Asiakkaat_Postitoimipaikat" FromRole="Asiakkaat" ToRole="Postitoimipaikat" />
-          <NavigationProperty Name="Tilaukset" Relationship="TilauksetModel.FK_Tilaukset_Asiakkaat" FromRole="Asiakkaat" ToRole="Tilaukset" />
-        </EntityType>
-        <Association Name="FK_Asiakkaat_Postitoimipaikat">
-          <End Type="TilauksetModel.Postitoimipaikat" Role="Postitoimipaikat" Multiplicity="0..1" />
-          <End Type="TilauksetModel.Asiakkaat" Role="Asiakkaat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Postitoimipaikat">
-              <PropertyRef Name="Postinumero" />
-            </Principal>
-            <Dependent Role="Asiakkaat">
-              <PropertyRef Name="Postinumero" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tilaukset_Asiakkaat">
-          <End Type="TilauksetModel.Asiakkaat" Role="Asiakkaat" Multiplicity="0..1" />
-          <End Type="TilauksetModel.Tilaukset" Role="Tilaukset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Asiakkaat">
-              <PropertyRef Name="AsiakasID" />
-            </Principal>
-            <Dependent Role="Tilaukset">
-              <PropertyRef Name="AsiakasID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TilauksetModelStoreContainer" CdmEntityContainer="TilauksetEntity">
+        <EntityContainerMapping StorageEntityContainer="TilauksetModelStoreContainer" CdmEntityContainer="TilauksetEntities">
+          <EntitySetMapping Name="Asiakkaat">
+            <EntityTypeMapping TypeName="TilauksetModel.Asiakkaat">
+              <MappingFragment StoreEntitySet="Asiakkaat">
+                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
+                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
+                <ScalarProperty Name="Osoite" ColumnName="Osoite" />
+                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
+                <ScalarProperty Name="Puhelinumero" ColumnName="Puhelinumero" />
+                <ScalarProperty Name="Sähköposti" ColumnName="Sähköposti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Henkilot">
             <EntityTypeMapping TypeName="TilauksetModel.Henkilot">
               <MappingFragment StoreEntitySet="Henkilot">
@@ -520,18 +533,6 @@
                 <ScalarProperty Name="Kaupunki" ColumnName="Kaupunki" />
                 <ScalarProperty Name="Henkilomaara" ColumnName="Henkilomaara" />
                 <ScalarProperty Name="RiviID" ColumnName="RiviID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Asiakkaat">
-            <EntityTypeMapping TypeName="TilauksetModel.Asiakkaat">
-              <MappingFragment StoreEntitySet="Asiakkaat">
-                <ScalarProperty Name="Sähköposti" ColumnName="Sähköposti" />
-                <ScalarProperty Name="Puhelinumero" ColumnName="Puhelinumero" />
-                <ScalarProperty Name="Postinumero" ColumnName="Postinumero" />
-                <ScalarProperty Name="Osoite" ColumnName="Osoite" />
-                <ScalarProperty Name="Nimi" ColumnName="Nimi" />
-                <ScalarProperty Name="AsiakasID" ColumnName="AsiakasID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

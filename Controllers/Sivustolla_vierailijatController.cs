@@ -13,7 +13,7 @@ namespace TilausDB2.Controllers
     [CheckSession]
     public class Sivustolla_vierailijatController : Controller
     {
-        private TilauksetEntity db = new TilauksetEntity();
+        private TilauksetEntities db = new TilauksetEntities();
 
         // GET: Sivustolla_vierailijat
         public ActionResult Index()

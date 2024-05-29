@@ -13,7 +13,7 @@ namespace TilausDB2.Controllers
     [CheckSession]
     public class TilausrivitController : Controller
     {
-        private TilauksetEntity db = new TilauksetEntity();
+        private TilauksetEntities db = new TilauksetEntities();
 
         // GET: Tilausrivit
         public ActionResult Index()
